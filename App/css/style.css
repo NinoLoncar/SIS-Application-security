@@ -1,0 +1,27 @@
+body {
+	margin: 0;
+}
+header {
+	color: white;
+	background-color: #1259a1;
+	height: 5rem;
+}
+footer {
+	color: white;
+	background-color: #1259a1;
+	height: 5rem;
+	font-size: 1.25rem;
+}
+
+.main-container {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+.main-content {
+	flex: 1;
+}
+
+.center-text {
+	text-align: center;
+}
