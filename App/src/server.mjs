@@ -15,8 +15,11 @@ server.use("/css", express.static(path.join(__dirname, "../public/css")));
 server.use("/js", express.static(path.join(__dirname, "../public/js")));
 
 server.get("/", (req, res) => {
-	console.log(path.join(__dirname, "../public/html/index.html"));
 	res.sendFile(path.join(__dirname, "../public/html/index.html"));
+});
+
+server.get("/login", (req, res) => {
+	res.sendFile(path.join(__dirname, "../public/html/login.html"));
 });
 
 server.listen(port, () => {
