@@ -5,43 +5,22 @@ body {
 	margin: 0;
 	background-color: #fff5e0;
 }
-header {
-	color: white;
-	background-color: #1259a1;
-	height: 5rem;
-}
-footer {
-	color: white;
-	background-color: #1259a1;
-	height: 5rem;
-	font-size: 1.25rem;
-}
 
-.main-container {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-}
-.main-content {
-	flex: 1;
-}
-
-.center-text {
-	text-align: center;
-}
-
-input {
+input,
+select {
 	background-color: white;
 	border-width: 5px;
 	border: solid;
 	border-color: lightgray;
 	transition: border-color 0.5s ease;
 }
-input:focus {
+input:focus,
+select:focus {
 	outline: none !important;
 	border-color: #141e46;
 }
-input:hover {
+input:hover,
+select:hover {
 	border-color: #141e46;
 }
 
@@ -59,4 +38,8 @@ button:hover {
 	transform: scale(1.1);
 	background-color: #8decb4;
 	color: #000000;
+}
+
+.center-text {
+	text-align: center;
 }
