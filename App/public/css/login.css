@@ -5,8 +5,16 @@ input {
 button {
 	margin: auto;
 }
-span {
+
+hr {
+	width: 20rem;
+}
+a {
 	font-weight: bold;
+	color: #41b06e;
+}
+a:hover {
+	color: black;
 }
 .grid-container {
 	display: grid;
@@ -31,6 +39,7 @@ span {
 
 #email-text {
 	grid-row: 2;
+	font-weight: bold;
 	align-self: end;
 }
 #email-input {
@@ -38,6 +47,7 @@ span {
 }
 #password-text {
 	grid-row: 4;
+	font-weight: bold;
 	align-self: end;
 }
 #password-input {
