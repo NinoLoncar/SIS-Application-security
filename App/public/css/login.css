@@ -1,0 +1,51 @@
+input {
+	height: 2rem;
+	width: 20rem;
+}
+button {
+	margin: auto;
+}
+span {
+	font-weight: bold;
+}
+.grid-container {
+	display: grid;
+	grid-template-rows: 1fr 10fr 4fr;
+	height: 100vh;
+	width: 100vw;
+}
+.login-form {
+	grid-row: 2;
+	display: grid;
+	grid-template-rows: 10rem 2rem 4rem 2rem 4rem 5rem 4rem 5rem;
+	align-items: center;
+	justify-content: center;
+}
+
+#logo {
+	grid-row: 1;
+	margin: auto;
+	border-radius: 100%;
+	border: solid #41b06e;
+}
+
+#email-text {
+	grid-row: 2;
+	align-self: end;
+}
+#email-input {
+	grid-row: 3;
+}
+#password-text {
+	grid-row: 4;
+	align-self: end;
+}
+#password-input {
+	grid-row: 5;
+}
+#login-button {
+	grid-row: 6;
+}
+#register-button {
+	grid-row: 8;
+}

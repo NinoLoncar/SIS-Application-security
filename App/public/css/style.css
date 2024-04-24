@@ -1,5 +1,9 @@
+* {
+	font-size: 1.1rem;
+}
 body {
 	margin: 0;
+	background-color: #fff5e0;
 }
 header {
 	color: white;
@@ -24,4 +28,35 @@ footer {
 
 .center-text {
 	text-align: center;
+}
+
+input {
+	background-color: white;
+	border-width: 5px;
+	border: solid;
+	border-color: lightgray;
+	transition: border-color 0.5s ease;
+}
+input:focus {
+	outline: none !important;
+	border-color: #141e46;
+}
+input:hover {
+	border-color: #141e46;
+}
+
+button {
+	border-radius: 20px;
+	border: 0px;
+	background-color: #41b06e;
+	color: #ffffff;
+	width: 10rem;
+	height: 2.5rem;
+	font-weight: bold;
+	transition: transform 0.5s ease;
+}
+button:hover {
+	transform: scale(1.1);
+	background-color: #8decb4;
+	color: #000000;
 }
