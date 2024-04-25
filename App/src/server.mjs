@@ -2,11 +2,11 @@ import express from "express";
 import "dotenv/config";
 import { fileURLToPath } from "url";
 import path from "path";
-import HTMLManager from "../managers/html-manager.js";
+import UnsecureHtmlManager from "../managers/unsecure-html-manager.js";
 
 const server = express();
 const port = process.env.PORT;
-let htmlManager = new HTMLManager();
+let unsecureHtmlManager = new UnsecureHtmlManager();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -17,9 +17,9 @@ server.use("/css", express.static(path.join(__dirname, "../public/css")));
 server.use("/js", express.static(path.join(__dirname, "../public/js")));
 server.use("/images", express.static(path.join(__dirname, "../public/images")));
 
-server.get("/prijava", htmlManager.login);
-server.get("/registracija", htmlManager.registration);
-server.get("/", htmlManager.index);
+server.get("/prijava", unsecureHtmlManager.getLoginHtml);
+server.get("/registracija", unsecureHtmlManager.getRegistrationHtml);
+server.get("/", unsecureHtmlManager.getIndexHtml);
 
 server.listen(port, () => {
 	console.log(`Server pokrenut na portu: ${port}`);
