@@ -17,10 +17,10 @@ server.use("/css", express.static(path.join(__dirname, "../public/css")));
 server.use("/js", express.static(path.join(__dirname, "../public/js")));
 server.use("/images", express.static(path.join(__dirname, "../public/images")));
 
-server.get("/prijava", unsecureHtmlManager.getLoginHtml);
-server.get("/registracija", unsecureHtmlManager.getRegistrationHtml);
-server.get("/", unsecureHtmlManager.getIndexHtml);
+server.get("/unsecure/prijava", unsecureHtmlManager.getLoginHtml);
+server.get("/unsecure/registracija", unsecureHtmlManager.getRegistrationHtml);
+server.get("/unsecure/", unsecureHtmlManager.getIndexHtml);
 
-server.listen(port, () => {
+server.listen(port, async () => {
 	console.log(`Server pokrenut na portu: ${port}`);
 });
