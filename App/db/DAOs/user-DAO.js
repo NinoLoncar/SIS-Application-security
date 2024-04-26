@@ -19,6 +19,42 @@ class UserDAO {
 		return data;
 	};
 
+	getUserByEmail = async function (email) {
+		this.db.openConnection();
+		let sql =
+			"SELECT * FROM users WHERE email =?";
+		var data = await this.db.runQuery(sql, [email]);
+		this.db.closeConnection();
+		return data[0];
+	};
+
+	unsecureAddNewUser = async function (user) {
+		this.db.openConnection();
+		let sql =
+			"INSERT INTO users (roles_id, countries_id, name, surname, email, password, balance, address, postal) VALUES (" +
+			user.roles_id +
+			", " +
+			user.countries_id +
+			", '" +
+			user.name +
+			"', '" +
+			user.surname +
+			"', '" +
+			user.email +
+			"', '" +
+			user.password +
+			"', " +
+			user.balance +
+			", '" +
+			user.address +
+			"', '" +
+			user.postal +
+			"');";
+		var result = await this.db.runQuery(sql, []);
+		this.db.closeConnection();
+		return result;
+	}
+
 	dajSveKorisnike = async function () {
 		this.baza.spojiSeNaBazu();
 		let sql = "SELECT * FROM korisnik;";
