@@ -20,6 +20,7 @@ server.use("/images", express.static(path.join(__dirname, "../public/images")));
 
 server.get("/unsecure/prijava", unsecureHtmlManager.getLoginHtml);
 server.get("/unsecure/registracija", unsecureHtmlManager.getRegistrationHtml);
+server.get("/unsecure/profil", unsecureHtmlManager.getProfileHtml);
 server.get("/unsecure/", unsecureHtmlManager.getIndexHtml);
 
 server.post("/unsecure/registracija", (req, res) => {

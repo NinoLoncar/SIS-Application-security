@@ -1,0 +1,31 @@
+h2 {
+	display: inline;
+	font-size: 1.2rem;
+}
+.main-content {
+	padding-top: 2em;
+}
+.main-content div {
+	margin-top: 2rem;
+}
+
+hr {
+	max-width: 30rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+#two-factor-authentication {
+	font-weight: bold;
+	color: red;
+}
+
+#two-factor-authentication-button {
+	width: fit-content;
+	height: fit-content;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 2rem;
+}

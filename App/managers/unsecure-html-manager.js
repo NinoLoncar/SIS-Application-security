@@ -18,6 +18,10 @@ class HTMLManager {
 		let page = await loadPage("unsecure/index", req);
 		res.send(page);
 	};
+	getProfileHtml = async function (req, res) {
+		let page = await loadPage("unsecure/profile", req);
+		res.send(page);
+	};
 }
 module.exports = HTMLManager;
 
@@ -37,9 +41,9 @@ async function fillCountryDropdown(page) {
 	let countryDAO = new CountryDAO();
 	let countries = await countryDAO.getAllCountries();
 	let options = `<option value="${0}">Odaberite državu</option>`;
-	countries.forEach(country => {
+	countries.forEach((country) => {
 		options += `<option value="${country.id}">${country.name}</option>`;
 	});
-	page = page.replace('#države#', options);
+	page = page.replace("#države#", options);
 	return page;
 }
