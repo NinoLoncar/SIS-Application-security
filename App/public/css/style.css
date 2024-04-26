@@ -43,3 +43,66 @@ button:hover {
 .center-text {
 	text-align: center;
 }
+
+.main-container {
+	display: grid;
+	height: 100vh;
+	width: 100vw;
+	grid-template-rows: 2fr 20fr 2fr;
+}
+
+a {
+	font-size: 1.2rem;
+	text-decoration: none;
+}
+a:hover {
+	font-weight: bold;
+}
+a:visited {
+	color: inherit;
+}
+.current-page {
+	font-weight: bold;
+}
+/* HEADER */
+header {
+	grid-row: 1;
+	background-color: #8decb4;
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: 1fr 1fr 20fr 2fr;
+	padding: 1rem;
+	justify-content: baseline;
+}
+
+#app-name {
+	font-family: fantasy;
+	font-style: italic;
+}
+#logo {
+	border-radius: 100%;
+	border: solid #41b06e;
+}
+nav {
+	justify-self: baseline;
+	align-self: center;
+	margin-left: 5rem;
+	display: grid;
+	grid-auto-flow: column;
+	column-gap: 2rem;
+}
+#logout {
+	align-self: center;
+}
+
+/* HEADER END*/
+
+.main-content {
+	grid-row: 2;
+}
+
+footer {
+	grid-row: 3;
+	background-color: #8decb4;
+	padding: 1rem;
+}

@@ -16,6 +16,9 @@ a {
 a:hover {
 	color: black;
 }
+a:visited {
+	color: #41b06e;
+}
 .grid-container {
 	display: grid;
 	grid-template-rows: 1fr 10fr 4fr;
@@ -33,8 +36,6 @@ a:hover {
 #logo {
 	grid-row: 1;
 	margin: auto;
-	border-radius: 100%;
-	border: solid #41b06e;
 }
 
 #email-text {

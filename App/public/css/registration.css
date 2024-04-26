@@ -15,6 +15,9 @@ a {
 	font-weight: bold;
 	color: #41b06e;
 }
+a:visited {
+	color: #41b06e;
+}
 select {
 	width: 12rem;
 	height: 2.5rem;
@@ -44,8 +47,6 @@ a:hover {
 	grid-row: 1;
 	grid-column: 1 / span 3;
 	margin: auto;
-	border-radius: 100%;
-	border: solid #41b06e;
 	align-self: baseline;
 }
 
