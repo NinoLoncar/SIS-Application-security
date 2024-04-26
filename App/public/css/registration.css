@@ -120,3 +120,17 @@ a:hover {
 #login-page-text {
 	grid-column: 1 / span 3;
 }
+
+#error-container {
+	grid-column: 1 / span 3;
+	height: auto;
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+p {
+	color: red;
+	font-weight: bold;
+}

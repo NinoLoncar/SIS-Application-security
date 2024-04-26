@@ -4,8 +4,10 @@
 <head>
     <title>SIS - Application security</title>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../images/logo.png">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/registration.css">
+    <script src="../../js/unsecure/registration.js"></script>
 </head>
 
 <body class="grid-container">
@@ -30,6 +32,7 @@
 
         <span id="country-text">Država</span>
         <select id="select-input" name="country">
+            #države#
         </select>
 
         <span id="password-text">Lozinka</span>
@@ -41,6 +44,7 @@
         <button id="register-button" type="submit">
             Registriraj se
         </button>
+        <div id="error-container"></div>
         <hr>
         <span id="login-page-text" class="center-text"> Imate račun? <a href="/unsecure/prijava"> Prijavi se</a></span>
     </form>
