@@ -124,10 +124,6 @@ a:hover {
 
 #error-container {
 	grid-column: 1 / span 3;
-	height: auto;
-	width: auto;
-	margin-left: auto;
-	margin-right: auto;
 	text-align: center;
 }
 

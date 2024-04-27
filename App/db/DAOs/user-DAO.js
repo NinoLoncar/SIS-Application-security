@@ -13,7 +13,6 @@ class UserDAO {
 			"' AND password ='" +
 			password +
 			"';";
-		console.log(sql);
 		var data = await this.db.runQuery(sql, []);
 		this.db.closeConnection();
 		return data;
@@ -22,8 +21,8 @@ class UserDAO {
 	getUserByEmail = async function (email) {
 		this.db.openConnection();
 		let sql =
-			"SELECT * FROM users WHERE email =?";
-		var data = await this.db.runQuery(sql, [email]);
+			"SELECT * FROM users WHERE email = '" + email + "' ";
+		var data = await this.db.runQuery(sql, []);
 		this.db.closeConnection();
 		return data[0];
 	};

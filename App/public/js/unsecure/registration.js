@@ -4,10 +4,10 @@ let countriesSelectInput;
 window.addEventListener("load", async () => {
     txtRepeatedPassword = document.getElementById("confirm-password-input");
     countriesSelectInput = document.getElementById("select-input");
-    registrationButtonHandler();
+    handleRegistrationButtonClick();
 });
 
-async function registrationButtonHandler() {
+async function handleRegistrationButtonClick() {
     let btnRegister = document.getElementById("register-button");
     btnRegister.addEventListener('click', async (event) => {
         event.preventDefault();

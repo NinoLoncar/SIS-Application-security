@@ -60,3 +60,16 @@ a:visited {
 #register-button {
 	grid-row: 8;
 }
+
+#error-container {
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 1000;
+	text-align: center;
+}
+
+p {
+	color: red;
+	font-weight: bold;
+}
