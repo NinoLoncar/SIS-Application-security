@@ -30,6 +30,10 @@ server.use("/css", express.static(path.join(__dirname, "../public/css")));
 server.use("/js", express.static(path.join(__dirname, "../public/js")));
 server.use("/images", express.static(path.join(__dirname, "../public/images")));
 
+server.get("/sesija/ulogirani-korisnik", async (req, res) => {
+	userRest.getUserByEmail(req.session.email, res);
+});
+
 server.get("/unsecure/prijava", unsecureHtmlManager.getLoginHtml);
 server.get("/unsecure/registracija", unsecureHtmlManager.getRegistrationHtml);
 server.get("/unsecure/profil", unsecureHtmlManager.getProfileHtml);
@@ -40,7 +44,6 @@ server.get("/unsecure/", unsecureHtmlManager.getIndexHtml);
 server.post("/unsecure/registracija", (req, res) => {
 	userRest.unsecurePostUser(req, res);
 });
-
 server.post("/unsecure/prijava", async (req, res) => {
 	loginHandler.unsecureLogin(req, res);
 });
