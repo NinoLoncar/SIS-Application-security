@@ -42,6 +42,9 @@ server.post("/unsecure/registracija", (req, res) => {
 server.post("/unsecure/prijava", async (req, res) => {
 	loginHandler.unsecureLogin(req, res);
 });
+server.get("/unsecure/odjava", async (req, res) => {
+	loginHandler.unsecureLogout(req, res);
+});
 
 server.listen(port, async () => {
 	console.log(`Server pokrenut na portu: ${port}`);

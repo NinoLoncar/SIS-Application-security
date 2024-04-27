@@ -18,6 +18,7 @@ class HTMLManager {
 		let page = await loadPage("unsecure/index", req);
 		res.send(page);
 	};
+
 	getProfileHtml = async function (req, res) {
 		let page = await loadPage("unsecure/profile", req);
 		res.send(page);

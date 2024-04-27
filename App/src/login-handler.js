@@ -24,3 +24,10 @@ exports.unsecureLogin = async function (req, res) {
         return;
     }
 };
+
+exports.unsecureLogout = async function (req, res) {
+    req.session.userId = null;
+    req.session.email = null;
+    req.session.role = null;
+    res.redirect("/unsecure/prijava");
+}
