@@ -15,7 +15,19 @@ exports.unsecurePostUser = async function (req, res) {
         if (user) {
             res.type("application/json");
             res.status(201);
-            res.send();
+            res.send("Uspješno dodavanje!");
+            return;
+        }
+    });
+};
+
+exports.getUserByEmail = async function (email, res) {
+    let userDAO = new UserDAO();
+    userDAO.getUserByEmail(email).then(async (user) => {
+        if (user) {
+            res.type("application/json");
+            res.status(200);
+            res.send(user);
             return;
         }
     });
