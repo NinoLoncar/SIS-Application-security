@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+    <title>SIS - Application security</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../images/logo.png">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/add-news.css">
+    <script src="../../js/unsecure/add-news.js"></script>
+
+</head>
+
+<body>
+    <div class="main-container">
+        <header>
+            <a href="/unsecure/">
+                <img id="logo" src="/images/logo.png" alt="App logo" width="64px">
+            </a>
+            <span id="app-name">SIS - Application security</span>
+            <nav>
+                <a class="current-page" href="">Početna</a>
+                <a href="/unsecure/profil">Moj profil</a>
+                <a href="">Transakcije</a>
+                <a href="">Vijesti</a>
+            </nav>
+            <a href="/unsecure/odjava" id="logout">Odjavi se</a>
+        </header>
+        <div class="main-content center-text">
+            <h1>Dodaj vijest</h1>
+            <form>
+                Naslov:
+                <br>
+                <input id="news-heading" type="text">
+                <br>
+                URL slike:
+                <br>
+                <input id="image-url" type="text">
+                <br>
+                Tekst:
+                <br>
+                <textarea id="news-text">
+                    </textarea>
+                <br>
+                <div class="center-text">
+
+
+                    <button type="submit">
+                        Dodaj vijest
+                    </button>
+                    <div id="error-message">
+                        Greška
+                    </div>
+                </div>
+            </form>
+            <hr>
+        </div>
+        <footer class="center-text">
+            <span> Karlo Miloš &#38; Nino Lončar</span>
+        </footer>
+    </div>
+</body>
+
+</html>

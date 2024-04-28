@@ -1,0 +1,31 @@
+h1 {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	font-size: 2rem;
+}
+
+input {
+	margin-bottom: 2rem;
+	margin-top: 1rem;
+	width: 20vw;
+}
+
+textarea {
+	resize: both;
+	width: 20vw;
+}
+
+form {
+	text-align: left;
+	width: 20vw;
+	margin: auto;
+}
+button {
+	text-align: center;
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+}
+hr {
+	margin-top: 2rem;
+	width: 50vw;
+}

@@ -28,6 +28,10 @@ class HTMLManager {
 		let page = await loadPage("unsecure/news-details", req);
 		res.send(page);
 	};
+	getAddNewsHtml = async function (req, res) {
+		let page = await loadPage("unsecure/add-news", req);
+		res.send(page);
+	};
 }
 module.exports = HTMLManager;
 
