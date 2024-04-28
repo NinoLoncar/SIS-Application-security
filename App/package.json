@@ -11,9 +11,9 @@
 	"author": "Karlo Miloš & Nino Lončar",
 	"license": "ISC",
 	"dependencies": {
-		"dotenv": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/dotenv",
-		"express": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/express",
-		"express-session": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/express-session",
-		"sqlite3": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/sqlite3"
+		"dotenv": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/dotenv",
+		"express": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/express",
+		"express-session": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/express-session",
+		"sqlite3": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/sqlite3"
 	}
 }

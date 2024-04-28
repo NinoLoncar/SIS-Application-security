@@ -1,5 +1,5 @@
 import express from "express";
-import session from 'express-session';
+import session from "express-session";
 import "dotenv/config";
 import { fileURLToPath } from "url";
 import path from "path";
@@ -33,6 +33,7 @@ server.use("/images", express.static(path.join(__dirname, "../public/images")));
 server.get("/unsecure/prijava", unsecureHtmlManager.getLoginHtml);
 server.get("/unsecure/registracija", unsecureHtmlManager.getRegistrationHtml);
 server.get("/unsecure/profil", unsecureHtmlManager.getProfileHtml);
+server.get("/unsecure/vijest-detalji/", unsecureHtmlManager.getNewsDetailsHtml);
 server.get("/unsecure/", unsecureHtmlManager.getIndexHtml);
 
 server.post("/unsecure/registracija", (req, res) => {

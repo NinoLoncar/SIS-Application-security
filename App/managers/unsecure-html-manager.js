@@ -23,6 +23,11 @@ class HTMLManager {
 		let page = await loadPage("unsecure/profile", req);
 		res.send(page);
 	};
+
+	getNewsDetailsHtml = async function (req, res) {
+		let page = await loadPage("unsecure/news-details", req);
+		res.send(page);
+	};
 }
 module.exports = HTMLManager;
 
