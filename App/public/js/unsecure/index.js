@@ -1,6 +1,7 @@
 window.addEventListener('load', () => {
     getUserBalance();
     getNewestNews();
+    handleAddFundsButton();
 });
 
 async function getUserBalance() {
@@ -10,6 +11,14 @@ async function getUserBalance() {
         let txtBalance = document.getElementById("balance-value");
         txtBalance.innerText = `${user.balance}$`;
     }
+}
+
+function handleAddFundsButton() {
+    let btnAddFunds = document.getElementById("add-funds-button");
+    btnAddFunds.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = "/unsecure/transakcije";
+    })
 }
 
 async function getNewestNews() {
