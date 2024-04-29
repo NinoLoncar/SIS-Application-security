@@ -39,6 +39,7 @@ server.get("/unsecure/registracija", unsecureHtmlManager.getRegistrationHtml);
 server.get("/unsecure/profil", unsecureHtmlManager.getProfileHtml);
 server.get("/unsecure/vijest-detalji/", unsecureHtmlManager.getNewsDetailsHtml);
 server.get("/unsecure/dodaj-vijest/", unsecureHtmlManager.getAddNewsHtml);
+server.get("/unsecure/transakcije/", unsecureHtmlManager.getTransactionsHtml);
 server.get("/unsecure/", unsecureHtmlManager.getIndexHtml);
 
 server.post("/unsecure/registracija", (req, res) => {
