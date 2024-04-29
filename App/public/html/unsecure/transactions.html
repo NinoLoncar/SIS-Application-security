@@ -19,9 +19,9 @@
             </a>
             <span id="app-name">SIS - Application security</span>
             <nav>
-                <a class="current-page" href="">Početna</a>
+                <a href="/unsecure/">Početna</a>
                 <a href="/unsecure/profil">Moj profil</a>
-                <a href="">Transakcije</a>
+                <a class="current-page" href="">Transakcije</a>
                 <a href="">Vijesti</a>
             </nav>
             <a href="/unsecure/odjava" id="logout">Odjavi se</a>
@@ -34,7 +34,7 @@
             <div id="add-funds">
                 <input id="funds-for-adding" type="number" min="1" max="10000">
                 <div class="center-text">
-                    <button type="button">
+                    <button id="add-funds-button" type="button">
                         Dodaj sredstva
                     </button>
                     <div id="adding-error">
@@ -53,14 +53,12 @@
                 <input id="funds-for-sending" type="number" min="1">
                 <br>
                 <div class="center-text">
-                    <button type="button">
+                    <button id="send-funds-button" type="button">
                         Pošalji sredstva
                     </button>
                     <div id="sending-error">
-
                     </div>
                 </div>
-
             </div>
         </div>
         <footer class="center-text">
