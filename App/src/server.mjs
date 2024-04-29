@@ -6,6 +6,7 @@ import path from "path";
 import UnsecureHtmlManager from "../managers/unsecure-html-manager.js";
 import userRest from "./rest/user-rest.js";
 import loginHandler from "./login-handler.js";
+import transactionService from "./transaction-service.js";
 
 const server = express();
 const port = process.env.PORT;
@@ -33,6 +34,7 @@ server.use("/images", express.static(path.join(__dirname, "../public/images")));
 server.get("/sesija/ulogirani-korisnik", async (req, res) => {
 	userRest.getUserByEmail(req.session.email, res);
 });
+server.post("/add-funds", transactionService.addFunds);
 
 server.get("/unsecure/prijava", unsecureHtmlManager.getLoginHtml);
 server.get("/unsecure/registracija", unsecureHtmlManager.getRegistrationHtml);
@@ -43,15 +45,10 @@ server.get("/unsecure/transakcije/", unsecureHtmlManager.getTransactionsHtml);
 server.get("/unsecure/vijesti/", unsecureHtmlManager.getNewsHtml);
 server.get("/unsecure/", unsecureHtmlManager.getIndexHtml);
 
-server.post("/unsecure/registracija", (req, res) => {
-	userRest.unsecurePostUser(req, res);
-});
-server.post("/unsecure/prijava", async (req, res) => {
-	loginHandler.unsecureLogin(req, res);
-});
-server.get("/unsecure/odjava", async (req, res) => {
-	loginHandler.unsecureLogout(req, res);
-});
+server.get("/unsecure/odjava", loginHandler.unsecureLogout)
+server.post("/unsecure/registracija", userRest.unsecurePostUser);
+server.post("/unsecure/prijava", loginHandler.unsecureLogin);
+server.post("/unsecure/send-funds", transactionService.unsecureSendFunds);
 
 server.listen(port, async () => {
 	console.log(`Server pokrenut na portu: ${port}`);
