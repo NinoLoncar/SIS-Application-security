@@ -36,6 +36,10 @@ class HTMLManager {
 		let page = await loadPage("unsecure/transactions", req);
 		res.send(page);
 	};
+	getNewsHtml = async function (req, res) {
+		let page = await loadPage("unsecure/news", req);
+		res.send(page);
+	};
 }
 module.exports = HTMLManager;
 

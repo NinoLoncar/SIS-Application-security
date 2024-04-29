@@ -7,7 +7,8 @@ body {
 }
 
 input,
-select {
+select,
+textarea {
 	background-color: white;
 	border-width: 5px;
 	border: solid;
@@ -15,12 +16,14 @@ select {
 	transition: border-color 0.5s ease;
 }
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
 	outline: none !important;
 	border-color: #141e46;
 }
 input:hover,
-select:hover {
+select:hover,
+textarea:hover {
 	border-color: #141e46;
 }
 
@@ -46,7 +49,7 @@ button:hover {
 
 .main-container {
 	display: grid;
-	max-height: 100vh;
+	height: 100vh;
 	width: 100vw;
 	grid-template-rows: 2fr 20fr 2fr;
 }
