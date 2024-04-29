@@ -37,12 +37,12 @@ function handleLoginButtonClick() {
 }
 
 function getUserLoginData() {
-    let txtEmail = document.getElementById("email-input").value;
-    let txtPassword = document.getElementById("password-input").value;
+    let txtEmail = document.getElementById("email-input");
+    let txtPassword = document.getElementById("password-input");
 
     let data = {
-        email: txtEmail,
-        password: txtPassword,
+        email: txtEmail.value,
+        password: txtPassword.value,
     }
     return data;
 }

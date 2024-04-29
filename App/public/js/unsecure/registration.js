@@ -37,23 +37,23 @@ async function handleRegistrationButtonClick() {
 }
 
 function getUserRegistrationData() {
-    let txtFirstName = document.getElementById("first-name-input").value;
-    let txtLastName = document.getElementById("last-name-input").value;
-    let txtEmail = document.getElementById("email-input").value;
-    let txtPassword = document.getElementById("password-input").value;
-    let txtAddress = document.getElementById("adress-input").value;
-    let txtPostal = document.getElementById("postal-input").value;
+    let txtFirstName = document.getElementById("first-name-input");
+    let txtLastName = document.getElementById("last-name-input");
+    let txtEmail = document.getElementById("email-input");
+    let txtPassword = document.getElementById("password-input");
+    let txtAddress = document.getElementById("adress-input");
+    let txtPostal = document.getElementById("postal-input");
 
     let data = {
         roles_id: 0,
         countries_id: countriesSelectInput.value,
-        name: txtFirstName,
-        surname: txtLastName,
-        email: txtEmail,
-        password: txtPassword,
+        name: txtFirstName.value,
+        surname: txtLastName.value,
+        email: txtEmail.value,
+        password: txtPassword.value,
         balance: 0,
-        address: txtAddress,
-        postal: txtPostal,
+        address: txtAddress.value,
+        postal: txtPostal.value,
     }
     return data;
 }
