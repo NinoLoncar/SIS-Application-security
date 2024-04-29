@@ -12,7 +12,7 @@ exports.addFunds = async function (req, res) {
     let oldBalance = await getUserBalance(req);
     let userId = req.session.userId;
     if (!userId) return;
-    userDAO.addFundsToUserBalance(funds, userId).then(async () => {
+    userDAO.addFunds(funds, userId).then(async () => {
         let newBalance = await getUserBalance(req);
         if (newBalance == oldBalance + funds) {
             res.type("application/json");
