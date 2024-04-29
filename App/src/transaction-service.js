@@ -29,7 +29,7 @@ exports.addFunds = async function (req, res) {
     });
 }
 
-exports.sendFunds = async function (req, res) {
+exports.unsecureSendFunds = async function (req, res) { //secure treba provjeravati token
     let receiverEmail = req.query.receiver;
     let funds = req.query.funds;
     let areValidFunds = validateFunds(funds);
