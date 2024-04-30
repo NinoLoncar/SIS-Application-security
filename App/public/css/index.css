@@ -42,6 +42,7 @@ h1 {
 	max-height: 11rem;
 	max-width: 45vw;
 	transition: transform 0.5s ease;
+	cursor: pointer;
 }
 #news-1:hover,
 #news-2:hover {
