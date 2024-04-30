@@ -6,8 +6,8 @@ import path from "path";
 import UnsecureHtmlManager from "../managers/unsecure-html-manager.js";
 import userRest from "./rest/user-rest.js";
 import loginHandler from "./login-handler.js";
-import transactionService from "./transaction-service.js";
-
+import transactionService from "./services/transaction-service.js";
+import newsService from "./services/news-service.js"
 const server = express();
 const port = process.env.PORT;
 
@@ -34,21 +34,27 @@ server.use("/images", express.static(path.join(__dirname, "../public/images")));
 server.get("/sesija/ulogirani-korisnik", async (req, res) => {
 	userRest.getUserByEmail(req.session.email, res);
 });
-server.post("/add-funds", transactionService.addFunds);
+server.get("/sve-vijesti", newsService.getAllNews);
+server.get("/najnovije-vijesti", newsService.getTwoNewestNews);
+server.post("/dodaj-sredstva", transactionService.addFunds);
 
 server.get("/unsecure/prijava", unsecureHtmlManager.getLoginHtml);
 server.get("/unsecure/registracija", unsecureHtmlManager.getRegistrationHtml);
 server.get("/unsecure/profil", unsecureHtmlManager.getProfileHtml);
-server.get("/unsecure/vijest-detalji/", unsecureHtmlManager.getNewsDetailsHtml);
+//server.get("/unsecure/vijest-detalji/", unsecureHtmlManager.getNewsDetailsHtml);
 server.get("/unsecure/dodaj-vijest/", unsecureHtmlManager.getAddNewsHtml);
 server.get("/unsecure/transakcije/", unsecureHtmlManager.getTransactionsHtml);
 server.get("/unsecure/vijesti/", unsecureHtmlManager.getNewsHtml);
 server.get("/unsecure/", unsecureHtmlManager.getIndexHtml);
 
+server.get("/unsecure/vijesti/:id", unsecureHtmlManager.getNewsDetailsHtml);
+server.get("/unsecure/vijest/:id", newsService.getNewsById);
+
 server.get("/unsecure/odjava", loginHandler.unsecureLogout)
 server.post("/unsecure/registracija", userRest.unsecurePostUser);
 server.post("/unsecure/prijava", loginHandler.unsecureLogin);
-server.post("/unsecure/send-funds", transactionService.unsecureSendFunds);
+server.post("/unsecure/posalji-sredstva", transactionService.unsecureSendFunds);
+server.post("/unsecure/dodaj-vijest", newsService.unsecureAddNews);
 
 server.listen(port, async () => {
 	console.log(`Server pokrenut na portu: ${port}`);
