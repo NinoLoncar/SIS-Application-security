@@ -1,4 +1,4 @@
-const UserDAO = require("../db/DAOs/user-DAO.js");
+const UserDAO = require("../../db/DAOs/user-DAO.js");
 
 exports.addFunds = async function (req, res) {
     let funds = parseInt(req.body.funds);
@@ -11,7 +11,7 @@ exports.addFunds = async function (req, res) {
     let userDAO = new UserDAO();
     let oldBalance = await getUserBalance(req);
     let userId = req.session.userId;
-    if (!userId) return;
+
     userDAO.addFunds(funds, userId).then(async () => {
         let newBalance = await getUserBalance(req);
         if (newBalance == oldBalance + funds) {

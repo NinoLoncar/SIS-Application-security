@@ -1,7 +1,7 @@
 let userBalance;
 
 window.addEventListener("load", async () => {
-    getUserBalance();
+    await getUserBalance();
     handleAddFundsButton();
     handleSendFundsButton();
 });
@@ -28,7 +28,7 @@ function handleAddFundsButton() {
             headers: header,
             body: JSON.stringify(funds)
         };
-        const response = await fetch("http://localhost:12000/add-funds", params);
+        const response = await fetch("http://localhost:12000/dodaj-sredstva", params);
         if (response.status == 200) {
             await getUserBalance();
             clearTextboxes("add");
@@ -52,7 +52,7 @@ function handleSendFundsButton() {
             sendingErrorMessage.innerHTML = `<p>Provjerite unos!</p>`;
             return;
         }
-        const response = await fetch(`http://localhost:12000/unsecure/send-funds?funds=${funds}&receiver=${receiver}`, {
+        const response = await fetch(`http://localhost:12000/unsecure/posalji-sredstva?funds=${funds}&receiver=${receiver}`, {
             method: "post",
             credentials: "include"
         });

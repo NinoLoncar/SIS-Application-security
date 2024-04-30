@@ -1,13 +1,13 @@
 let txtRepeatedPassword;
 let countriesSelectInput;
 
-window.addEventListener("load", async () => {
+window.addEventListener("load", () => {
     txtRepeatedPassword = document.getElementById("confirm-password-input");
     countriesSelectInput = document.getElementById("select-input");
     handleRegistrationButtonClick();
 });
 
-async function handleRegistrationButtonClick() {
+function handleRegistrationButtonClick() {
     let btnRegister = document.getElementById("register-button");
     btnRegister.addEventListener('click', async (event) => {
         event.preventDefault();
