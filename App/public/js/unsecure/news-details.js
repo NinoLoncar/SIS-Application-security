@@ -1,12 +1,14 @@
+let newsId;
 window.addEventListener('load', () => {
+    newsId = getIdFromUrl();
     generatePage();
+    handleAddCommentButton();
 });
 
 async function generatePage() {
-    let newsId = getIdFromUrl();
     let newsData = await getNewsData(newsId);
-    console.log("data", newsData);
     fillPageWithNewsData(newsData);
+    getNewsComments(newsId);
 }
 
 function getIdFromUrl() {
@@ -33,4 +35,55 @@ function fillPageWithNewsData(newsData) {
     newsImage.src = newsData.url;
     newsImage.alt = "Slika";
     newsText.textContent = newsData.content;
+}
+
+async function getNewsComments() {
+    const response = await fetch(`http://localhost:12000/komentari/${newsId}`);
+    if (response.status == 200) {
+        const data = await response.json();
+        showComments(data);
+    }
+}
+
+function handleAddCommentButton() {
+    let btnAddComment = document.getElementById('add-comment-button');
+    btnAddComment.addEventListener('click', async (event) => {
+        event.preventDefault();
+        let txtComment = document.getElementById("new-comment");
+        let header = new Headers();
+        header.set('Content-Type', 'application/json');
+        let params = {
+            method: "POST",
+            headers: header,
+            body: JSON.stringify({
+                content: txtComment.value,
+                newsId: newsId
+            })
+        };
+        const response = await fetch("http://localhost:12000/dodaj-komentar", params);
+        if (response.status == 201) {
+            txtComment.value = "";
+            getNewsComments();
+        }
+    })
+}
+
+function showComments(data) {
+    let tbody = document.getElementById('comments-table-body');
+
+    tbody.innerHTML = '';
+
+    data.forEach(comment => {
+        let commentHTML = `
+            <tr>
+                <td>
+                    <div class="commenter-username">${comment.user.name} ${comment.user.surname}</div>
+                    <br>
+                    <div>${comment.date}</div>
+                </td>
+                <td class="comment-text">${comment.content}</td>
+            </tr>
+        `;
+        tbody.innerHTML += commentHTML;
+    });
 }

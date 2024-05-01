@@ -1,6 +1,6 @@
 window.addEventListener('load', async () => {
-    await getUserBalance();
-    await getNewestNews();
+    getUserBalance();
+    getNewestNews();
     handleAddFundsButton();
 });
 

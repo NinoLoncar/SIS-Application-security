@@ -33,6 +33,18 @@ exports.getUserByEmail = async function (email, res) {
     });
 };
 
+exports.getUserById = async function (id, res) {
+    let userDAO = new UserDAO();
+    userDAO.getUserById(id).then(async (user) => {
+        if (user) {
+            res.type("application/json");
+            res.status(200);
+            res.send(user);
+            return;
+        }
+    });
+};
+
 async function isEmailRegistered(email) {
     let userDAO = new UserDAO();
     let user = await userDAO.getUserByEmail(email);
