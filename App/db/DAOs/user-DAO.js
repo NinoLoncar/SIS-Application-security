@@ -27,6 +27,15 @@ class UserDAO {
 		return data[0];
 	};
 
+	getUserById = async function (id) {
+		this.db.openConnection();
+		let sql =
+			"SELECT * FROM users WHERE id =?";
+		var data = await this.db.runQuery(sql, [id]);
+		this.db.closeConnection();
+		return data[0];
+	};
+
 	unsecureAddNewUser = async function (user) {
 		this.db.openConnection();
 		let sql =
