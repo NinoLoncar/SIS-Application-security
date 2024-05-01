@@ -1,7 +1,7 @@
 let userBalance;
 
 window.addEventListener("load", async () => {
-    await getUserBalance();
+    getUserBalance();
     handleAddFundsButton();
     handleSendFundsButton();
 });

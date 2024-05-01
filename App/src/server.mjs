@@ -37,11 +37,12 @@ server.get("/sesija/ulogirani-korisnik", async (req, res) => {
 server.get("/sve-vijesti", newsService.getAllNews);
 server.get("/najnovije-vijesti", newsService.getTwoNewestNews);
 server.post("/dodaj-sredstva", transactionService.addFunds);
+server.post("/dodaj-komentar", newsService.addComment);
+server.get("/komentari/:newsId", newsService.getCommentsByNewsId)
 
 server.get("/unsecure/prijava", unsecureHtmlManager.getLoginHtml);
 server.get("/unsecure/registracija", unsecureHtmlManager.getRegistrationHtml);
 server.get("/unsecure/profil", unsecureHtmlManager.getProfileHtml);
-//server.get("/unsecure/vijest-detalji/", unsecureHtmlManager.getNewsDetailsHtml);
 server.get("/unsecure/dodaj-vijest/", unsecureHtmlManager.getAddNewsHtml);
 server.get("/unsecure/transakcije/", unsecureHtmlManager.getTransactionsHtml);
 server.get("/unsecure/vijesti/", unsecureHtmlManager.getNewsHtml);

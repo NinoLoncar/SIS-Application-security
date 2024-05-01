@@ -12,7 +12,7 @@ exports.unsecureLogin = async function (req, res) {
     }
     let result = await userDAO.unsecureGetUserByEmailAndPassword(userData.email, userData.password);
     if (result.length > 0) {
-        req.session.userId = result[0].id
+        req.session.userId = result[0].id;
         req.session.email = result[0].email;
         req.session.role = result[0].roles_id;
         res.status(200);

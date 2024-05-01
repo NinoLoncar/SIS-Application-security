@@ -1,5 +1,5 @@
 window.addEventListener('load', async () => {
-    await getAllNews();
+    getAllNews();
 });
 
 async function getAllNews() {
