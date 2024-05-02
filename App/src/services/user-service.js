@@ -21,9 +21,9 @@ exports.unsecurePostUser = async function (req, res) {
     });
 };
 
-exports.getUserByEmail = async function (email, res) {
+exports.unsecureGetUserByEmail = async function (email, res) {
     let userDAO = new UserDAO();
-    userDAO.getUserByEmail(email).then(async (user) => {
+    userDAO.unsecureGetUserByEmail(email).then(async (user) => {
         if (user) {
             res.type("application/json");
             res.status(200);
@@ -47,6 +47,6 @@ exports.getUserById = async function (id, res) {
 
 async function isEmailRegistered(email) {
     let userDAO = new UserDAO();
-    let user = await userDAO.getUserByEmail(email);
+    let user = await userDAO.unsecureGetUserByEmail(email);
     return user != undefined;
 }

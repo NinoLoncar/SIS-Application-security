@@ -57,7 +57,7 @@ exports.getTwoNewestNews = async function (req, res) {
     });
 }
 
-exports.addComment = async function (req, res) {
+exports.unsecureAddComment = async function (req, res) { //nema validacije
     if (!req.body.newsId || !req.body.content) {
         res.status(400);
         res.send("Nepotpuni podaci");

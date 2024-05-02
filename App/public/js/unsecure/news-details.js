@@ -18,8 +18,8 @@ function getIdFromUrl() {
     return id;
 }
 
-async function getNewsData(id) {
-    const response = await fetch(`http://localhost:12000/unsecure/vijest/${id}`);
+async function getNewsData() {
+    const response = await fetch(`http://localhost:12000/unsecure/vijest/${newsId}`);
     const data = await response.json();
     if (response.status == 200 && data != undefined) {
         return data;
@@ -60,7 +60,7 @@ function handleAddCommentButton() {
                 newsId: newsId
             })
         };
-        const response = await fetch("http://localhost:12000/dodaj-komentar", params);
+        const response = await fetch("http://localhost:12000/unsecure/dodaj-komentar", params);
         if (response.status == 201) {
             txtComment.value = "";
             getNewsComments();

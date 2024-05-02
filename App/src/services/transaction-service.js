@@ -58,7 +58,7 @@ function validateFunds(funds) {
 
 async function validateReceiver(receiverEmail) {
     let userDao = new UserDAO();
-    let receiver = await userDao.getUserByEmail(receiverEmail);
+    let receiver = await userDao.unsecureGetUserByEmail(receiverEmail);
     return receiver !== undefined ? receiver.id : false;
 }
 
@@ -66,6 +66,6 @@ async function getUserBalance(req) {
     let userDAO = new UserDAO();
     let email = req.session.email;
     if (!email) return;
-    let user = await userDAO.getUserByEmail(email);
+    let user = await userDAO.unsecureGetUserByEmail(email);
     return user.balance;
 }
