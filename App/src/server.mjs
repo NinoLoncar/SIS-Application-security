@@ -31,6 +31,17 @@ server.use("/css", express.static(path.join(__dirname, "../public/css")));
 server.use("/js", express.static(path.join(__dirname, "../public/js")));
 server.use("/images", express.static(path.join(__dirname, "../public/images")));
 
+server.use((req, res, next) => {
+	if (
+		!req.session.userId &&
+		req.path !== "/unsecure/prijava" &&
+		req.path !== "/unsecure/registracija"
+	) {
+		return res.redirect("/unsecure/prijava");
+	}
+	next();
+});
+
 server.get("/sesija/ulogirani-korisnik", async (req, res) => {
 	userRest.getUserByEmail(req.session.email, res);
 });
