@@ -4,9 +4,7 @@ import "dotenv/config";
 import { fileURLToPath } from "url";
 import path from "path";
 import cors from "cors";
-import speakeasy from "speakeasy";
-import qrcode from "qrcode";
-import UnsecureHtmlManager from "../managers/unsecure-html-manager.js";
+import HtmlManager from "../managers/unsecure-html-manager.js";
 import userService from "./services/user-service.js";
 import loginHandler from "./login-handler.js";
 import transactionService from "./services/transaction-service.js";
@@ -31,8 +29,6 @@ server.use(
 	})
 );
 
-let unsecureHtmlManager = new UnsecureHtmlManager();
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 server.use(express.urlencoded({ extended: true }));
@@ -54,12 +50,17 @@ server.use((req, res, next) => {
 	if (
 		!req.session.userId &&
 		req.path !== "/unsecure/prijava" &&
-		req.path !== "/unsecure/registracija"
+		req.path !== "/unsecure/registracija" &&
+		req.path !== "/secure/prijava" &&
+		req.path !== "/secure/prijava"
 	) {
-		return res.redirect("/unsecure/prijava");
+		return res.redirect("/secure/prijava");
 	}
 	next();
 });
+
+ServeUnsecureHtml();
+ServeSecureHtml();
 
 server.get("/sesija/ulogirani-korisnik", async (req, res) => {
 	userService.unsecureGetUserByEmail(req.session.email, res);
@@ -69,15 +70,7 @@ server.get("/najnovije-vijesti", newsService.getTwoNewestNews);
 server.post("/dodaj-sredstva", transactionService.addFunds);
 server.get("/komentari/:newsId", newsService.getCommentsByNewsId);
 
-server.get("/unsecure/prijava", unsecureHtmlManager.getLoginHtml);
-server.get("/unsecure/registracija", unsecureHtmlManager.getRegistrationHtml);
-server.get("/unsecure/dodaj-vijest/", unsecureHtmlManager.getAddNewsHtml);
-server.get("/unsecure/transakcije/", unsecureHtmlManager.getTransactionsHtml);
-server.get("/unsecure/vijesti/", unsecureHtmlManager.getNewsHtml);
-server.get("/unsecure/", unsecureHtmlManager.getIndexHtml);
-server.get("/unsecure/vijesti/:id", unsecureHtmlManager.getNewsDetailsHtml);
-
-server.get("/unsecure/odjava", loginHandler.unsecureLogout);
+server.get("/odjava", loginHandler.logout);
 server.get("/unsecure/vijest/:id", newsService.getNewsById);
 server.post("/unsecure/registracija", userService.unsecurePostUser);
 server.post("/unsecure/prijava", loginHandler.unsecureLogin);
@@ -90,3 +83,69 @@ server.get("/secure/generiraj-qr", twoFactorAuth.generateQRCode);
 server.listen(port, async () => {
 	console.log(`Server pokrenut na portu: ${port}`);
 });
+
+function ServeUnsecureHtml() {
+	let unsecureHtmlManager = new HtmlManager(false);
+
+	server.get(
+		"/unsecure/prijava",
+		unsecureHtmlManager.getLoginHtml.bind(unsecureHtmlManager)
+	);
+	server.get(
+		"/unsecure/registracija",
+		unsecureHtmlManager.getRegistrationHtml.bind(unsecureHtmlManager)
+	);
+	server.get(
+		"/unsecure/dodaj-vijest/",
+		unsecureHtmlManager.getAddNewsHtml.bind(unsecureHtmlManager)
+	);
+	server.get(
+		"/unsecure/transakcije/",
+		unsecureHtmlManager.getTransactionsHtml.bind(unsecureHtmlManager)
+	);
+	server.get(
+		"/unsecure/vijesti/",
+		unsecureHtmlManager.getNewsHtml.bind(unsecureHtmlManager)
+	);
+	server.get(
+		"/unsecure/",
+		unsecureHtmlManager.getIndexHtml.bind(unsecureHtmlManager)
+	);
+	server.get(
+		"/unsecure/vijesti/:id",
+		unsecureHtmlManager.getNewsDetailsHtml.bind(unsecureHtmlManager)
+	);
+}
+
+function ServeSecureHtml() {
+	let secureHtmlManager = new HtmlManager(true);
+
+	server.get(
+		"/secure/prijava",
+		secureHtmlManager.getLoginHtml.bind(secureHtmlManager)
+	);
+	server.get(
+		"/secure/registracija",
+		secureHtmlManager.getRegistrationHtml.bind(secureHtmlManager)
+	);
+	server.get(
+		"/secure/dodaj-vijest/",
+		secureHtmlManager.getAddNewsHtml.bind(secureHtmlManager)
+	);
+	server.get(
+		"/secure/transakcije/",
+		secureHtmlManager.getTransactionsHtml.bind(secureHtmlManager)
+	);
+	server.get(
+		"/secure/vijesti/",
+		secureHtmlManager.getNewsHtml.bind(secureHtmlManager)
+	);
+	server.get(
+		"/secure/",
+		secureHtmlManager.getIndexHtml.bind(secureHtmlManager)
+	);
+	server.get(
+		"/secure/vijesti/:id",
+		secureHtmlManager.getNewsDetailsHtml.bind(secureHtmlManager)
+	);
+}

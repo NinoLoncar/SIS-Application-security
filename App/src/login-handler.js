@@ -30,9 +30,9 @@ exports.unsecureLogin = async function (req, res) {
 	}
 };
 
-exports.unsecureLogout = async function (req, res) {
+exports.logout = async function (req, res) {
 	req.session.userId = null;
 	req.session.email = null;
 	req.session.role = null;
-	res.redirect("/unsecure/prijava");
+	res.redirect("/secure/prijava");
 };

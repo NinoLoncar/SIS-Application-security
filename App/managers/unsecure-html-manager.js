@@ -2,46 +2,54 @@ const fs = require("fs/promises");
 const path = require("path");
 const CountryDAO = require("../db/DAOs/country-DAO.js");
 
-class HTMLManager {
+class HtmlManager {
+	constructor(isSecure) {
+		if (isSecure == true) {
+			this.pathBeginning = "secure";
+		} else {
+			this.pathBeginning = "unsecure";
+		}
+	}
+
 	getLoginHtml = async function (req, res) {
-		let page = await loadPage("unsecure/login", req);
+		let page = await loadPage(this.pathBeginning + "/login", req);
 		res.send(page);
 	};
 
 	getRegistrationHtml = async function (req, res) {
-		let page = await loadPage("unsecure/registration", req);
+		let page = await loadPage(this.pathBeginning + "/registration", req);
 		page = await fillCountryDropdown(page);
 		res.send(page);
 	};
 
 	getIndexHtml = async function (req, res) {
-		let page = await loadPage("unsecure/index", req);
+		let page = await loadPage(this.pathBeginning + "/index", req);
 		res.send(page);
 	};
 
 	getProfileHtml = async function (req, res) {
-		let page = await loadPage("unsecure/profile", req);
+		let page = await loadPage(this.pathBeginning + "/profile", req);
 		res.send(page);
 	};
 
 	getNewsDetailsHtml = async function (req, res) {
-		let page = await loadPage("unsecure/news-details", req);
+		let page = await loadPage(this.pathBeginning + "/news-details", req);
 		res.send(page);
 	};
 	getAddNewsHtml = async function (req, res) {
-		let page = await loadPage("unsecure/add-news", req);
+		let page = await loadPage(this.pathBeginning + "/add-news", req);
 		res.send(page);
 	};
 	getTransactionsHtml = async function (req, res) {
-		let page = await loadPage("unsecure/transactions", req);
+		let page = await loadPage(this.pathBeginning + "/transactions", req);
 		res.send(page);
 	};
 	getNewsHtml = async function (req, res) {
-		let page = await loadPage("unsecure/news", req);
+		let page = await loadPage(this.pathBeginning + "/news", req);
 		res.send(page);
 	};
 }
-module.exports = HTMLManager;
+module.exports = HtmlManager;
 
 async function loadPage(pageName, req) {
 	let page = loadHTML(pageName);
