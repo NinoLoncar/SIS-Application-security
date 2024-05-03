@@ -3,12 +3,17 @@ import session from "express-session";
 import "dotenv/config";
 import { fileURLToPath } from "url";
 import path from "path";
+import cors from 'cors';
+import speakeasy from 'speakeasy';
+import qrcode from 'qrcode';
 import UnsecureHtmlManager from "../managers/unsecure-html-manager.js";
 import userService from "./services/user-service.js";
 import loginHandler from "./login-handler.js";
 import transactionService from "./services/transaction-service.js";
 import newsService from "./services/news-service.js";
-import cors from 'cors';
+import twoFactorAuth from "./two-factor-auth.js";
+
+
 const server = express();
 const port = process.env.PORT;
 
@@ -70,6 +75,8 @@ server.post("/unsecure/prijava", loginHandler.unsecureLogin);
 server.post("/unsecure/posalji-sredstva", transactionService.unsecureSendFunds);
 server.post("/unsecure/dodaj-vijest", newsService.unsecureAddNews);
 server.post("/unsecure/dodaj-komentar", newsService.unsecureAddComment);
+
+server.get("/secure/generiraj-qr", twoFactorAuth.generateQRCode);
 
 
 server.listen(port, async () => {

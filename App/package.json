@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "server.mjs",
 	"scripts": {
-		"prepare": "npm link --save dotenv express sqlite3 express-session cors",
+		"prepare": "npm link --save dotenv express sqlite3 express-session cors speakeasy qrcode",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "nodemon ./src/server.mjs"
 	},
@@ -15,6 +15,8 @@
 		"dotenv": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/dotenv",
 		"express": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/express",
 		"express-session": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/express-session",
+		"qrcode": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/qrcode",
+		"speakeasy": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/speakeasy",
 		"sqlite3": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/sqlite3"
 	}
 }
