@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+    <title>SIS - Application security</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../images/logo.png">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/registration.css">
+    <script src="../../js/secure/registration.js"></script>
+</head>
+
+<body class="grid-container">
+    <form id="registration-form">
+        <img id="logo" src="/images/logo.png" alt="App logo">
+
+        <span id="first-name-text">Ime</span>
+        <input id="first-name-input" type="text">
+
+        <span id="last-name-text">Prezime</span>
+        <input id="last-name-input" type="text">
+
+
+        <span id="email-text">Email</span>
+        <input id="email-input" type="text">
+
+        <span id="adress-text">Adresa</span>
+        <input id="adress-input" type="text">
+
+        <span id="postal-text">Poštanski broj</span>
+        <input id="postal-input" type="text">
+
+        <span id="country-text">Država</span>
+        <select id="select-input" name="country">
+            #države#
+        </select>
+
+        <span id="password-text">Lozinka</span>
+        <input id="password-input" type="password">
+
+        <span id="confirm-password-text">Potvrdite lozinku</span>
+        <input id="confirm-password-input" type="password">
+
+        <button id="register-button" type="submit">
+            Registriraj se
+        </button>
+        <div id="error-container"></div>
+        <hr>
+        <span id="login-page-text" class="center-text"> Imate račun? <a href="/secure/prijava"> Prijavi se</a></span>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+    <title>SIS - Application security</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../images/logo.png">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/transactions.css">
+    <script src="../../js/secure/transactions.js"></script>
+
+</head>
+
+<body>
+    <div class="main-container">
+        <header>
+            <a href="/secure/">
+                <img id="logo" src="/images/logo.png" alt="App logo" width="64px">
+            </a>
+            <span id="app-name">SIS - Application security</span>
+            <nav>
+                <a href="/secure/">Početna</a>
+                <a class="current-page" href="">Transakcije</a>
+                <a href="/secure/vijesti">Vijesti</a>
+            </nav>
+            <a href="/odjava" id="logout">Odjavi se</a>
+        </header>
+        <div class="main-content">
+            <div id="balance">
+                Vaše stanje:
+                <span id="balance-value"></span>
+            </div>
+            <div id="add-funds">
+                <input id="funds-for-adding" type="number" min="1" max="10000">
+                <div class="center-text">
+                    <button id="add-funds-button" type="button">
+                        Dodaj sredstva
+                    </button>
+                    <div id="adding-error">
+
+                    </div>
+                </div>
+
+            </div>
+            <div id="send-funds">
+                Email primatelja:
+                <br>
+                <input id="reciever-email" type="text">
+                <br>
+                Količina:
+                <br>
+                <input id="funds-for-sending" type="number" min="1">
+                <br>
+                <div class="center-text">
+                    <button id="send-funds-button" type="button">
+                        Pošalji sredstva
+                    </button>
+                    <div id="sending-error">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="center-text">
+            <span> Karlo Miloš &#38; Nino Lončar</span>
+        </footer>
+    </div>
+</body>
+
+</html>
