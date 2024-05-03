@@ -8,6 +8,7 @@ import userService from "./services/user-service.js";
 import loginHandler from "./login-handler.js";
 import transactionService from "./services/transaction-service.js";
 import newsService from "./services/news-service.js";
+import cors from 'cors';
 const server = express();
 const port = process.env.PORT;
 
@@ -19,6 +20,10 @@ server.use(
 		resave: false,
 	})
 );
+server.use(cors({
+	origin: '*',
+	credentials: true
+}));
 
 let unsecureHtmlManager = new UnsecureHtmlManager();
 
@@ -55,18 +60,17 @@ server.get("/unsecure/registracija", unsecureHtmlManager.getRegistrationHtml);
 server.get("/unsecure/dodaj-vijest/", unsecureHtmlManager.getAddNewsHtml);
 server.get("/unsecure/transakcije/", unsecureHtmlManager.getTransactionsHtml);
 server.get("/unsecure/vijesti/", unsecureHtmlManager.getNewsHtml);
-server.post("/unsecure/dodaj-komentar", newsService.unsecureAddComment);
-
 server.get("/unsecure/", unsecureHtmlManager.getIndexHtml);
-
 server.get("/unsecure/vijesti/:id", unsecureHtmlManager.getNewsDetailsHtml);
-server.get("/unsecure/vijest/:id", newsService.getNewsById);
 
 server.get("/unsecure/odjava", loginHandler.unsecureLogout);
+server.get("/unsecure/vijest/:id", newsService.getNewsById);
 server.post("/unsecure/registracija", userService.unsecurePostUser);
 server.post("/unsecure/prijava", loginHandler.unsecureLogin);
 server.post("/unsecure/posalji-sredstva", transactionService.unsecureSendFunds);
 server.post("/unsecure/dodaj-vijest", newsService.unsecureAddNews);
+server.post("/unsecure/dodaj-komentar", newsService.unsecureAddComment);
+
 
 server.listen(port, async () => {
 	console.log(`Server pokrenut na portu: ${port}`);
