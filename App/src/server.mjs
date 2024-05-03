@@ -3,16 +3,15 @@ import session from "express-session";
 import "dotenv/config";
 import { fileURLToPath } from "url";
 import path from "path";
-import cors from 'cors';
-import speakeasy from 'speakeasy';
-import qrcode from 'qrcode';
+import cors from "cors";
+import speakeasy from "speakeasy";
+import qrcode from "qrcode";
 import UnsecureHtmlManager from "../managers/unsecure-html-manager.js";
 import userService from "./services/user-service.js";
 import loginHandler from "./login-handler.js";
 import transactionService from "./services/transaction-service.js";
 import newsService from "./services/news-service.js";
 import twoFactorAuth from "./two-factor-auth.js";
-
 
 const server = express();
 const port = process.env.PORT;
@@ -21,14 +20,16 @@ server.use(
 	session({
 		secret: "secret",
 		saveUninitialized: true,
-		cookie: { maxAge: 1000 * 60 * 60 },
+		cookie: { maxAge: 1000 * 60 * 60, sameSite: "strict" },
 		resave: false,
 	})
 );
-server.use(cors({
-	origin: '*',
-	credentials: true
-}));
+server.use(
+	cors({
+		origin: "*",
+		credentials: true,
+	})
+);
 
 let unsecureHtmlManager = new UnsecureHtmlManager();
 
@@ -42,6 +43,14 @@ server.use("/js", express.static(path.join(__dirname, "../public/js")));
 server.use("/images", express.static(path.join(__dirname, "../public/images")));
 
 server.use((req, res, next) => {
+	res.setHeader(
+		"Content-Security-Policy",
+		"default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src *; frame-src 'self'"
+	);
+	res.setHeader("X-Frame-Options", "sameorigin");
+	server.disable("x-powered-by");
+	res.setHeader("X-Content-Type-Options", "nosniff");
+
 	if (
 		!req.session.userId &&
 		req.path !== "/unsecure/prijava" &&
@@ -77,7 +86,6 @@ server.post("/unsecure/dodaj-vijest", newsService.unsecureAddNews);
 server.post("/unsecure/dodaj-komentar", newsService.unsecureAddComment);
 
 server.get("/secure/generiraj-qr", twoFactorAuth.generateQRCode);
-
 
 server.listen(port, async () => {
 	console.log(`Server pokrenut na portu: ${port}`);

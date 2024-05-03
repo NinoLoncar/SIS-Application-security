@@ -11,12 +11,12 @@
 	"author": "Karlo Miloš & Nino Lončar",
 	"license": "ISC",
 	"dependencies": {
-		"cors": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/cors",
-		"dotenv": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/dotenv",
-		"express": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/express",
-		"express-session": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/express-session",
-		"qrcode": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/qrcode",
-		"speakeasy": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/speakeasy",
-		"sqlite3": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/sqlite3"
+		"cors": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/cors",
+		"dotenv": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/dotenv",
+		"express": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/express",
+		"express-session": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/express-session",
+		"qrcode": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/qrcode",
+		"speakeasy": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/speakeasy",
+		"sqlite3": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/sqlite3"
 	}
 }
