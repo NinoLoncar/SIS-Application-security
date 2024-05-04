@@ -4,7 +4,7 @@ import "dotenv/config";
 import { fileURLToPath } from "url";
 import path from "path";
 import cors from "cors";
-import HtmlManager from "../managers/unsecure-html-manager.js";
+import HtmlManager from "../managers/html-manager.js";
 import userService from "./services/user-service.js";
 import loginHandler from "./login-handler.js";
 import transactionService from "./services/transaction-service.js";
@@ -41,8 +41,7 @@ server.use("/images", express.static(path.join(__dirname, "../public/images")));
 server.use((req, res, next) => {
 	res.setHeader(
 		"Content-Security-Policy",
-		"default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src *; frame-src 'self'"
-	);
+		"default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: *; frame-src 'self'");
 	res.setHeader("X-Frame-Options", "sameorigin");
 	server.disable("x-powered-by");
 	res.setHeader("X-Content-Type-Options", "nosniff");
@@ -78,7 +77,9 @@ server.post("/unsecure/posalji-sredstva", transactionService.unsecureSendFunds);
 server.post("/unsecure/dodaj-vijest", newsService.unsecureAddNews);
 server.post("/unsecure/dodaj-komentar", newsService.unsecureAddComment);
 
-server.get("/secure/generiraj-qr", twoFactorAuth.generateQRCode);
+server.get("/secure/2fa", twoFactorAuth.activate2FA);
+server.post("/secure/prijava", loginHandler.secureLogin)
+server.post("/secure/provjeri-auth-kod", twoFactorAuth.verfiyToken);
 
 server.listen(port, async () => {
 	console.log(`Server pokrenut na portu: ${port}`);
