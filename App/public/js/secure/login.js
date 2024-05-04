@@ -10,7 +10,7 @@ function handleLoginButtonClick() {
     btnLogin.addEventListener('click', async (event) => {
         event.preventDefault();
 
-        let userData = getUserLoginData();
+        let userData = gatherUserLoginData();
         let isValidUserLoginData = validateUserLoginData(userData);
         if (!isValidUserLoginData) {
             return;
@@ -23,10 +23,10 @@ function handleLoginButtonClick() {
             headers: header,
             body: JSON.stringify(userData)
         };
-        console.log(JSON.stringify(userData))
-        const response = await fetch("http://localhost:12000/unsecure/prijava", params);
+        const response = await fetch("http://localhost:12000/secure/prijava", params);
         if (response.status == 200) {
-            window.location.href = "/unsecure";
+            let user = await response.json();
+            twoFactorAuthentication(user);
         }
         else {
             let data = await response.json();
@@ -36,7 +36,40 @@ function handleLoginButtonClick() {
     })
 }
 
-function getUserLoginData() {
+function twoFactorAuthentication(user) {
+    if (user.activated_2fa) {
+        var twoFactorAuth = document.getElementById("two-factor-auth");
+        twoFactorAuth.style.visibility = "visible";
+        let btnVerifyCode = document.getElementById("two-factor-code-button");
+        btnVerifyCode.addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            let header = new Headers();
+            header.set('Content-Type', 'application/json');
+            let code = document.getElementById("two-factor-code");
+            let data = {
+                token: code.value
+            }
+            let params = {
+                method: "POST",
+                headers: header,
+                body: JSON.stringify(data)
+            };
+            const response = await fetch("http://localhost:12000/secure/provjeri-auth-kod", params);
+            if (response.status == 200) {
+                window.location.href = "/secure"
+            }
+            else {
+                window.location.reload();
+            }
+        })
+    }
+    else {
+        window.location.href = "/secure"
+    }
+}
+
+function gatherUserLoginData() {
     let txtEmail = document.getElementById("email-input");
     let txtPassword = document.getElementById("password-input");
 

@@ -1,5 +1,6 @@
 window.addEventListener('load', async () => {
     getUserBalance();
+    handleActivate2FAButton();
     getNewestNews();
     handleAddFundsButton();
 });
@@ -10,6 +11,35 @@ async function getUserBalance() {
         let user = await response.json();
         let txtBalance = document.getElementById("balance-value");
         txtBalance.innerText = `${user.balance}$`;
+    }
+}
+
+async function handleActivate2FAButton() {
+    let btnActivate2fa = document.getElementById("activate-2fa-button");
+    await setActivate2FAButtonText(btnActivate2fa);
+    btnActivate2fa.addEventListener('click', async (event) => {
+        event.preventDefault();
+        const response = await fetch("http://localhost:12000/secure/2fa");
+        if (response.status == 201) {
+            const imgElement = document.createElement('img');
+            imgElement.src = await response.text();
+            const imgContainer = document.getElementById('qr-container');
+            imgContainer.appendChild(imgElement);
+        }
+        setActivate2FAButtonText(btnActivate2fa);
+    })
+}
+
+async function setActivate2FAButtonText(btnActivate2fa) {
+    const response = await fetch("http://localhost:12000/sesija/ulogirani-korisnik");
+    if (response.status == 200) {
+        let user = await response.json();
+        if (user.activated_2fa) {
+            btnActivate2fa.textContent = "Isključi 2FA";
+        }
+        else {
+            btnActivate2fa.textContent = "Uključi 2FA";
+        }
     }
 }
 

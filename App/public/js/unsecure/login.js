@@ -23,7 +23,6 @@ function handleLoginButtonClick() {
             headers: header,
             body: JSON.stringify(userData)
         };
-        console.log(JSON.stringify(userData))
         const response = await fetch("http://localhost:12000/unsecure/prijava", params);
         if (response.status == 200) {
             window.location.href = "/unsecure";
