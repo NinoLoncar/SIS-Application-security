@@ -78,5 +78,29 @@ class UserDAO {
 		this.db.closeConnection();
 		return result;
 	}
+
+	set2FAUserStatus = async function (userId, status) {
+		this.db.openConnection();
+		let sql = 'UPDATE users SET activated_2fa = ? WHERE id = ?';
+		var result = await this.db.runQuery(sql, [status, userId]);
+		this.db.closeConnection();
+		return result;
+	}
+
+	addSecretKeyToUserAccount = async function (userId, secretKey) {
+		this.db.openConnection();
+		let sql = 'UPDATE users SET secret_key = ? WHERE id = ?';
+		var result = await this.db.runQuery(sql, [secretKey, userId]);
+		this.db.closeConnection();
+		return result;
+	}
+
+	getUserSecretKey = async function (userId) {
+		this.db.openConnection();
+		let sql = 'SELECT secret_key FROM users WHERE id = ?';
+		var result = await this.db.runQuery(sql, [userId]);
+		this.db.closeConnection();
+		return result[0].secret_key;
+	}
 }
 module.exports = UserDAO;
