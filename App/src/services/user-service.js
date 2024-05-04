@@ -2,7 +2,7 @@ const UserDAO = require("../../db/DAOs/user-DAO.js");
 
 exports.unsecureGetUserByEmail = async function (email, res) {
 	let userDAO = new UserDAO();
-	userDAO.unsecureGetUserByEmail(email).then(async (user) => {
+	userDAO.getUserByEmail(email).then(async (user) => {
 		if (user) {
 			res.type("application/json");
 			res.status(200);

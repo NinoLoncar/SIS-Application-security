@@ -18,10 +18,18 @@ class UserDAO {
 		return data;
 	};
 
-	unsecureGetUserByEmail = async function (email) {
+	secureGetUserByEmailAndPassword = async function (email, password) {
 		this.db.openConnection();
-		let sql = "SELECT * FROM users WHERE email = '" + email + "' ";
-		var data = await this.db.runQuery(sql, []);
+		let sql = "SELECT * FROM users WHERE email = ? AND password = ?;";
+		var data = await this.db.runQuery(sql, [email, password]);
+		this.db.closeConnection();
+		return data;
+	};
+
+	getUserByEmail = async function (email) {
+		this.db.openConnection();
+		let sql = "SELECT * FROM users WHERE email = ?";
+		var data = await this.db.runQuery(sql, [email]);
 		this.db.closeConnection();
 		return data[0];
 	};

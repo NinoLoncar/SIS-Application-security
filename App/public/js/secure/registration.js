@@ -29,7 +29,7 @@ function handleRegistrationButtonClick() {
 			"http://localhost:12000/secure/registracija",
 			params
 		);
-		if (response.status == 201) window.location.href = "/unsecure/prijava";
+		if (response.status == 201) window.location.href = "/secure/prijava";
 		else {
 			let data = await response.json();
 			let errorMessage = data.error;

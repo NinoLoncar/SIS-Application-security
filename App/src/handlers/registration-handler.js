@@ -53,6 +53,6 @@ exports.secureRegisterUser = async function (req, res) {
 
 async function isEmailRegistered(email) {
 	let userDAO = new UserDAO();
-	let user = await userDAO.unsecureGetUserByEmail(email);
+	let user = await userDAO.getUserByEmail(email);
 	return user != undefined;
 }
