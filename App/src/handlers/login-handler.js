@@ -39,6 +39,11 @@ exports.secureLogin = async function (req, res) {
 	res.type("application/json");
 
 	let existingUser = await userDAO.getUserByEmail(userData.email);
+	if (!existingUser) {
+		res.status(400);
+		res.send(JSON.stringify({ error: "Netočni podaci!" }));
+		return;
+	}
 	let encryptedPassword = await encryption.hashBcrypt(
 		userData.password,
 		existingUser.salt
