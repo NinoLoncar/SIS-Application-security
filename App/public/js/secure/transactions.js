@@ -20,6 +20,7 @@ function handleAddFundsButton() {
     let btnAddFunds = document.getElementById("add-funds-button");
     btnAddFunds.addEventListener('click', async (event) => {
         event.preventDefault();
+        addingErrorMessage.innerHTML = "";
         let funds = getFunds();
         let header = new Headers();
         header.set('Content-Type', 'application/json');
@@ -41,7 +42,7 @@ function handleAddFundsButton() {
     });
 }
 
-function handleSendFundsButton() {
+async function handleSendFundsButton() {
     let sendingErrorMessage = document.getElementById('sending-error');
     let btnSendFunds = document.getElementById("send-funds-button");
     btnSendFunds.addEventListener('click', async (event) => {
@@ -52,11 +53,15 @@ function handleSendFundsButton() {
             sendingErrorMessage.innerHTML = `<p>Provjerite unos!</p>`;
             return;
         }
-        const response = await fetch(`http://localhost:12000/unsecure/posalji-sredstva?funds=${funds}&receiver=${receiver}`, {
-            method: "post",
-            credentials: "include"
-        });
 
+        let divCSRF = document.getElementById("send-funds");
+        let csrfToken = divCSRF.dataset.hiddenText;
+        let header = new Headers();
+        header.set('X-CSRF-TOKEN', csrfToken);
+        const response = await fetch(`http://localhost:12000/secure/posalji-sredstva?funds=${funds}&receiver=${receiver}`, {
+            method: "post",
+            headers: header,
+        });
         if (response.status == 200) {
             getUserBalance();
             clearTextboxes("send");

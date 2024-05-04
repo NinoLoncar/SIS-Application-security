@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "server.mjs",
 	"scripts": {
-		"prepare": "npm link --save dotenv express sqlite3 express-session cors speakeasy qrcode",
+		"prepare": "npm link --save dotenv express sqlite3 express-session cors speakeasy qrcode bcrypt csrf",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "nodemon ./src/server.mjs"
 	},
@@ -12,13 +12,14 @@
 	"license": "ISC",
 	"dependencies": {
 		"ajv": "^8.13.0",
-		"bcrypt": "^5.1.1",
-		"cors": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/cors",
-		"dotenv": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/dotenv",
-		"express": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/express",
-		"express-session": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/express-session",
-		"qrcode": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/qrcode",
-		"speakeasy": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/speakeasy",
-		"sqlite3": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/sqlite3"
+		"bcrypt": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/bcrypt",
+		"cors": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/cors",
+		"csrf": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/csrf",
+		"dotenv": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/dotenv",
+		"express": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/express",
+		"express-session": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/express-session",
+		"qrcode": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/qrcode",
+		"speakeasy": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/speakeasy",
+		"sqlite3": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/sqlite3"
 	}
 }

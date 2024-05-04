@@ -43,6 +43,9 @@ class HtmlManager {
 	};
 	getTransactionsHtml = async function (req, res) {
 		let page = await loadPage(this.pathBeginning + "/transactions", req);
+		if (this.pathBeginning == "secure") {
+			page = page.replace('<div id="send-funds">', `<div id="send-funds" data-hidden-text="${req.session.csrfToken}">`);
+		}
 		res.send(page);
 	};
 	getNewsHtml = async function (req, res) {

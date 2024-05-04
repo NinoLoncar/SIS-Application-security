@@ -31,9 +31,9 @@ function handleRegistrationButtonClick() {
 		);
 		if (response.status == 201) window.location.href = "/secure/prijava";
 		else {
-			let data = await response.json();
-			let errorMessage = data.error;
-			console.log(errorMessage);
+			let data = await response.text();
+			let errorContainer = document.getElementById("error-container");
+			errorContainer.innerHTML += `<p>${data}</p>`;
 		}
 	});
 }

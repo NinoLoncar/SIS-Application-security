@@ -34,6 +34,16 @@ class UserDAO {
 		return data[0];
 	};
 
+	unsecureGetUserByEmail = async function (email) {
+		this.db.openConnection();
+		let sql =
+			"SELECT * FROM users WHERE email = '" +
+			email + "';";
+		var data = await this.db.runQuery(sql, [email]);
+		this.db.closeConnection();
+		return data[0];
+	};
+
 	getUserById = async function (id) {
 		this.db.openConnection();
 		let sql = "SELECT * FROM users WHERE id =?";
