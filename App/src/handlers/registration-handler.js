@@ -8,9 +8,7 @@ exports.unsecureRegisterUser = async function (req, res) {
 	if (userWithSameEmailExists) {
 		res.type("application/json");
 		res.status(400);
-		res.send(
-			JSON.stringify({ error: "Korisnik s tim emailom je već registriran!" })
-		);
+		res.send("Korisnik s tim emailom već postoji!");
 		return;
 	}
 	userData.password = encryption.hashSha1(userData.password);
@@ -32,15 +30,13 @@ exports.secureRegisterUser = async function (req, res) {
 	if (userWithSameEmailExists) {
 		res.type("application/json");
 		res.status(400);
-		res.send(
-			JSON.stringify({ error: "Korisnik s tim emailom je već registriran!" })
-		);
+		res.send("Neispravni podaci!");
 		return;
 	}
 	let salt = await encryption.generateSalt();
 	userData.password = await encryption.hashBcrypt(userData.password, salt);
 	userData.salt = salt;
-	userData.roles_id = 2; //hardkodira se user role
+	userData.roles_id = 2;
 	userDAO.secureAddNewUser(userData).then(async (user) => {
 		if (user) {
 			res.type("application/json");

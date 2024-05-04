@@ -82,7 +82,7 @@ server.post("/unsecure/dodaj-komentar", newsService.unsecureAddComment);
 server.get("/secure/2fa", twoFactorAuth.activate2FA);
 server.post("/secure/prijava", loginHandler.secureLogin);
 server.post("/secure/provjeri-auth-kod", twoFactorAuth.verfiyToken);
-
+server.post("/secure/posalji-sredstva", transactionService.secureSendFunds);
 server.post("/secure/registracija", registrationHandler.secureRegisterUser);
 
 server.listen(port, async () => {
