@@ -18,8 +18,11 @@ async function getUserBalance() {
 
 function handleAddFundsButton() {
     let btnAddFunds = document.getElementById("add-funds-button");
+    let addingErrorMessage = document.getElementById('adding-error');
+
     btnAddFunds.addEventListener('click', async (event) => {
         event.preventDefault();
+        addingErrorMessage.innerHTML = "";
         let funds = getFunds();
         let header = new Headers();
         header.set('Content-Type', 'application/json');
@@ -34,7 +37,6 @@ function handleAddFundsButton() {
             clearTextboxes("add");
         }
         else {
-            let addingErrorMessage = document.getElementById('adding-error');
             addingErrorMessage.innerHTML = `<p>${await response.text()}</p>`;
             clearTextboxes("add");
         }
@@ -46,6 +48,7 @@ function handleSendFundsButton() {
     let btnSendFunds = document.getElementById("send-funds-button");
     btnSendFunds.addEventListener('click', async (event) => {
         event.preventDefault();
+        sendingErrorMessage.innerHTML = "";
         let funds = document.getElementById("funds-for-sending").value;
         let receiver = document.getElementById("reciever-email").value;
         if (funds > userBalance || funds == "" || receiver == "") {
