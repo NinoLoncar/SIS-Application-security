@@ -39,7 +39,7 @@ class UserDAO {
 		let sql =
 			"SELECT * FROM users WHERE email = '" +
 			email + "';";
-		var data = await this.db.runQuery(sql, [email]);
+		var data = await this.db.runQuery(sql, []);
 		this.db.closeConnection();
 		return data[0];
 	};

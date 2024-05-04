@@ -6,7 +6,8 @@ exports.unsecureLogin = async function (req, res) {
 	let userDAO = new UserDAO();
 	let userData = req.body;
 	res.type("application/json");
-	let userExists = await userDAO.getUserByEmail(userData.email);
+	let userExists = await userDAO.unsecureGetUserByEmail(userData.email);
+	console.log(userExists)
 	if (!userExists) {
 		res.status(400);
 		res.send(JSON.stringify({ error: "Upisali ste krivi email!" }));

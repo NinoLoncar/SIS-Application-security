@@ -39,6 +39,12 @@ class HtmlManager {
 	};
 	getAddNewsHtml = async function (req, res) {
 		let page = await loadPage(this.pathBeginning + "/add-news", req);
+		if ((this.pathBeginning == "secure" && req.session.role == 1)) {
+			res.send(page);
+			return;
+		} else if ((this.pathBeginning == "secure" && req.session.role != 1)) {
+			return;
+		}
 		res.send(page);
 	};
 	getTransactionsHtml = async function (req, res) {
