@@ -18,6 +18,8 @@ async function getUserBalance() {
 
 function handleAddFundsButton() {
     let btnAddFunds = document.getElementById("add-funds-button");
+    let addingErrorMessage = document.getElementById('adding-error');
+
     btnAddFunds.addEventListener('click', async (event) => {
         event.preventDefault();
         addingErrorMessage.innerHTML = "";
@@ -35,7 +37,6 @@ function handleAddFundsButton() {
             clearTextboxes("add");
         }
         else {
-            let addingErrorMessage = document.getElementById('adding-error');
             addingErrorMessage.innerHTML = `<p>${await response.text()}</p>`;
             clearTextboxes("add");
         }
@@ -45,6 +46,7 @@ function handleAddFundsButton() {
 async function handleSendFundsButton() {
     let sendingErrorMessage = document.getElementById('sending-error');
     let btnSendFunds = document.getElementById("send-funds-button");
+
     btnSendFunds.addEventListener('click', async (event) => {
         event.preventDefault();
         let funds = document.getElementById("funds-for-sending").value;

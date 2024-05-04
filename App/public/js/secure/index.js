@@ -47,7 +47,7 @@ function handleAddFundsButton() {
     let btnAddFunds = document.getElementById("add-funds-button");
     btnAddFunds.addEventListener('click', (event) => {
         event.preventDefault();
-        window.location.href = "/unsecure/transakcije";
+        window.location.href = "/secure/transakcije";
     })
 }
 
