@@ -52,7 +52,7 @@ server.use((req, res, next) => {
 		req.path !== "/unsecure/prijava" &&
 		req.path !== "/unsecure/registracija" &&
 		req.path !== "/secure/prijava" &&
-		req.path !== "/secure/prijava"
+		req.path !== "/secure/registracija"
 	) {
 		return res.redirect("/secure/prijava");
 	}

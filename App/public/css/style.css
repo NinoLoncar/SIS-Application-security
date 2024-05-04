@@ -73,7 +73,7 @@ header {
 	background-color: #8decb4;
 	display: grid;
 	grid-auto-flow: column;
-	grid-template-columns: 1fr 1fr 20fr 2fr;
+	grid-template-columns: 1fr 1fr 3fr 20fr 2fr;
 	padding: 1rem;
 	justify-content: baseline;
 }
@@ -85,6 +85,12 @@ header {
 #logo {
 	border-radius: 100%;
 	border: solid #41b06e;
+}
+#version {
+	text-align: center;
+	margin: auto;
+	font-weight: bold;
+	font-style: italic;
 }
 nav {
 	justify-self: baseline;

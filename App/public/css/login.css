@@ -19,6 +19,11 @@ a:hover {
 a:visited {
 	color: #41b06e;
 }
+
+.grid-container a {
+	margin: 1rem;
+}
+
 .grid-container {
 	display: grid;
 	grid-template-rows: 1fr 10fr 4fr;

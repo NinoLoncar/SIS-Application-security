@@ -25,6 +25,10 @@ select {
 a:hover {
 	color: black;
 }
+
+.grid-container a {
+	margin: 1rem;
+}
 .grid-container {
 	display: grid;
 	grid-template-rows: 1fr 10fr 1fr;
@@ -35,7 +39,7 @@ a:hover {
 	grid-row: 2;
 	display: grid;
 	grid-template-columns: 5fr 1fr 5fr;
-	grid-template-rows: 12rem repeat(4, 2rem 4rem) 6rem 2rem 4rem;
+	grid-template-rows: 12rem repeat(4, 2rem 4rem) 4rem 1rem 3rem;
 	width: 40%;
 	align-self: center;
 	justify-self: center;
