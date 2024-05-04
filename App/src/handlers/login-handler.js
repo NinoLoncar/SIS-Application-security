@@ -1,5 +1,5 @@
-const UserDAO = require("../db/DAOs/user-DAO.js");
-const encryption = require("./encryption.js");
+const UserDAO = require("../../db/DAOs/user-DAO.js");
+const encryption = require("../encryption.js");
 
 exports.unsecureLogin = async function (req, res) {
 	let userDAO = new UserDAO();
@@ -11,7 +11,7 @@ exports.unsecureLogin = async function (req, res) {
 		res.send(JSON.stringify({ error: "Upisali ste krivi email!" }));
 		return;
 	}
-	let encryptedPassword = encryption.encryptSha1(userData.password);
+	let encryptedPassword = encryption.hashSha1(userData.password);
 	let result = await userDAO.unsecureGetUserByEmailAndPassword(
 		userData.email,
 		encryptedPassword
@@ -36,7 +36,7 @@ exports.secureLogin = async function (req, res) {
 	let userDAO = new UserDAO();
 	let userData = req.body;
 	res.type("application/json");
-	let encryptedPassword = encryption.encryptSha1(userData.password); //promijeniti u bolji sha
+	let encryptedPassword = encryption.hashSha1(userData.password); //promijeniti u bolji sha
 	let result = await userDAO.unsecureGetUserByEmailAndPassword(
 		userData.email,
 		encryptedPassword

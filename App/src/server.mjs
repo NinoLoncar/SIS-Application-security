@@ -6,7 +6,8 @@ import path from "path";
 import cors from "cors";
 import HtmlManager from "../managers/html-manager.js";
 import userService from "./services/user-service.js";
-import loginHandler from "./login-handler.js";
+import loginHandler from "./handlers/login-handler.js";
+import registrationHandler from "./handlers/registration-handler.js";
 import transactionService from "./services/transaction-service.js";
 import newsService from "./services/news-service.js";
 import twoFactorAuth from "./two-factor-auth.js";
@@ -41,7 +42,8 @@ server.use("/images", express.static(path.join(__dirname, "../public/images")));
 server.use((req, res, next) => {
 	res.setHeader(
 		"Content-Security-Policy",
-		"default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: *; frame-src 'self'");
+		"default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: *; frame-src 'self'"
+	);
 	res.setHeader("X-Frame-Options", "sameorigin");
 	server.disable("x-powered-by");
 	res.setHeader("X-Content-Type-Options", "nosniff");
@@ -71,15 +73,17 @@ server.get("/komentari/:newsId", newsService.getCommentsByNewsId);
 
 server.get("/odjava", loginHandler.logout);
 server.get("/unsecure/vijest/:id", newsService.getNewsById);
-server.post("/unsecure/registracija", userService.unsecurePostUser);
+server.post("/unsecure/registracija", registrationHandler.unsecureRegisterUser);
 server.post("/unsecure/prijava", loginHandler.unsecureLogin);
 server.post("/unsecure/posalji-sredstva", transactionService.unsecureSendFunds);
 server.post("/unsecure/dodaj-vijest", newsService.unsecureAddNews);
 server.post("/unsecure/dodaj-komentar", newsService.unsecureAddComment);
 
 server.get("/secure/2fa", twoFactorAuth.activate2FA);
-server.post("/secure/prijava", loginHandler.secureLogin)
+server.post("/secure/prijava", loginHandler.secureLogin);
 server.post("/secure/provjeri-auth-kod", twoFactorAuth.verfiyToken);
+
+server.post("/secure/registracija", registrationHandler.secureRegisterUser);
 
 server.listen(port, async () => {
 	console.log(`Server pokrenut na portu: ${port}`);
