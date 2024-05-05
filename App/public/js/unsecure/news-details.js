@@ -19,7 +19,7 @@ function getIdFromUrl() {
 }
 
 async function getNewsData() {
-    const response = await fetch(`http://localhost:12000/unsecure/vijest/${newsId}`);
+    const response = await fetch(`http://localhost:12000/vijest/${newsId}`);
     const data = await response.json();
     if (response.status == 200 && data != undefined) {
         return data;

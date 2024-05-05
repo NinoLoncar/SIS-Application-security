@@ -35,6 +35,7 @@ exports.getNewsById = async function (req, res) {
     if (newsId === undefined) {
         res.status(400);
         res.send("Greška!");
+        return;
     }
     let newsDAO = new NewsDAO();
     res.type("application/json");
@@ -61,6 +62,7 @@ exports.unsecureAddComment = async function (req, res) { //nema validacije
     if (!req.body.newsId || !req.body.content) {
         res.status(400);
         res.send("Nepotpuni podaci");
+        return;
     }
     let newsDAO = new NewsDAO();
     let commentDate = new Date();
@@ -72,7 +74,6 @@ exports.unsecureAddComment = async function (req, res) { //nema validacije
         date: formatedDate,
     }
     newsDAO.addComment(commentData).then(async () => {
-        res.type("application/json");
         res.status(201);
         res.send("Uspješno dodavanje");
         return;
@@ -97,7 +98,6 @@ exports.getCommentsByNewsId = async function (req, res) {
         }
         res.status(200).json(comments);
     } catch (error) {
-        console.error("Greška prilikom dohvaćanja komentara:", error);
         res.status(500).send("Došlo je do pogreške prilikom dohvaćanja komentara.");
     }
 

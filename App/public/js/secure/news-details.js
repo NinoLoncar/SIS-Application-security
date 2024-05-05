@@ -19,7 +19,7 @@ function getIdFromUrl() {
 }
 
 async function getNewsData() {
-    const response = await fetch(`http://localhost:12000/unsecure/vijest/${newsId}`);
+    const response = await fetch(`http://localhost:12000/vijest/${newsId}`);
     const data = await response.json();
     if (response.status == 200 && data != undefined) {
         return data;
@@ -70,20 +70,28 @@ function handleAddCommentButton() {
 
 function showComments(data) {
     let tbody = document.getElementById('comments-table-body');
-
     tbody.innerHTML = '';
 
     data.forEach(comment => {
-        let commentHTML = `
-            <tr>
-                <td>
-                    <div class="commenter-username">${comment.user.name} ${comment.user.surname}</div>
-                    <br>
-                    <div>${comment.date}</div>
-                </td>
-                <td class="comment-text">${comment.content}</td>
-            </tr>
-        `;
-        tbody.innerHTML += commentHTML;
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+
+        let usernameDiv = document.createElement('div');
+        usernameDiv.className = 'commenter-username';
+        usernameDiv.textContent = comment.user.username;
+        td1.appendChild(usernameDiv);
+
+        let dateDiv = document.createElement('div');
+        dateDiv.textContent = comment.date;
+        td1.appendChild(dateDiv);
+
+        tr.appendChild(td1);
+
+        let td2 = document.createElement('td');
+        td2.className = 'comment-text';
+        td2.textContent = comment.content;
+        tr.appendChild(td2);
+
+        tbody.appendChild(tr);
     });
 }

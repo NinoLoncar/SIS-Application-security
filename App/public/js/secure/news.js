@@ -34,7 +34,7 @@ function fillPageWithNews(data) {
 
         newsElement.addEventListener('click', (event) => {
             event.preventDefault();
-            window.location.href = `/unsecure/vijesti/${newsItem.id}`;
+            window.location.href = `/secure/vijesti/${newsItem.id}`;
         })
 
         newsContainer.appendChild(newsElement);

@@ -68,11 +68,11 @@ server.get("/sesija/ulogirani-korisnik", async (req, res) => {
 });
 server.get("/sve-vijesti", newsService.getAllNews);
 server.get("/najnovije-vijesti", newsService.getTwoNewestNews);
+server.get("/vijest/:id", newsService.getNewsById);
 server.post("/dodaj-sredstva", transactionService.addFunds);
 server.get("/komentari/:newsId", newsService.getCommentsByNewsId);
 
 server.get("/odjava", loginHandler.logout);
-server.get("/unsecure/vijest/:id", newsService.getNewsById);
 server.post("/unsecure/registracija", registrationHandler.unsecureRegisterUser);
 server.post("/unsecure/prijava", loginHandler.unsecureLogin);
 server.post("/unsecure/posalji-sredstva", transactionService.unsecureSendFunds);
