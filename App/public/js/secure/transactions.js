@@ -24,6 +24,7 @@ function handleAddFundsButton() {
         event.preventDefault();
         addingErrorMessage.innerHTML = "";
         let funds = getFunds();
+
         let header = new Headers();
         header.set('Content-Type', 'application/json');
         let params = {
@@ -55,9 +56,9 @@ async function handleSendFundsButton() {
             sendingErrorMessage.innerHTML = `<p>Provjerite unos!</p>`;
             return;
         }
-
         let divCSRF = document.getElementById("send-funds");
         let csrfToken = divCSRF.dataset.hiddenText;
+
         let header = new Headers();
         header.set('X-CSRF-TOKEN', csrfToken);
         const response = await fetch(`http://localhost:12000/secure/posalji-sredstva?funds=${funds}&receiver=${receiver}`, {

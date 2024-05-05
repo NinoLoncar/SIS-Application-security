@@ -11,7 +11,7 @@ function handleAddNewsButton() {
         if (!isValidNewsData) {
             return;
         }
-        console.log(isValidNewsData);
+
         let header = new Headers();
         header.set('Content-Type', 'application/json');
         let params = {

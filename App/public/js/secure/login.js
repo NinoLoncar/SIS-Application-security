@@ -10,7 +10,7 @@ function handleLoginButtonClick() {
     btnLogin.addEventListener('click', async (event) => {
         event.preventDefault();
 
-        let userData = gatherUserLoginData();
+        let userData = getUserLoginData();
         let isValidUserLoginData = validateUserLoginData(userData);
         if (!isValidUserLoginData) {
             return;
@@ -43,7 +43,6 @@ function twoFactorAuthentication(user) {
         let btnVerifyCode = document.getElementById("two-factor-code-button");
         btnVerifyCode.addEventListener('click', async (event) => {
             event.preventDefault();
-
             let header = new Headers();
             header.set('Content-Type', 'application/json');
             let code = document.getElementById("two-factor-code");
@@ -69,7 +68,7 @@ function twoFactorAuthentication(user) {
     }
 }
 
-function gatherUserLoginData() {
+function getUserLoginData() {
     let txtEmail = document.getElementById("email-input");
     let txtPassword = document.getElementById("password-input");
 

@@ -1,11 +1,11 @@
 let newsId;
 window.addEventListener('load', () => {
     newsId = getIdFromUrl();
-    generatePage();
+    getPageContent();
     handleAddCommentButton();
 });
 
-async function generatePage() {
+async function getPageContent() {
     let newsData = await getNewsData(newsId);
     fillPageWithNewsData(newsData);
     getNewsComments(newsId);
@@ -47,9 +47,11 @@ async function getNewsComments() {
 
 function handleAddCommentButton() {
     let btnAddComment = document.getElementById('add-comment-button');
+
     btnAddComment.addEventListener('click', async (event) => {
         event.preventDefault();
         let txtComment = document.getElementById("new-comment");
+
         let header = new Headers();
         header.set('Content-Type', 'application/json');
         let params = {
@@ -75,7 +77,6 @@ function showComments(data) {
     data.forEach(comment => {
         let tr = document.createElement('tr');
         let td1 = document.createElement('td');
-
         let usernameDiv = document.createElement('div');
         usernameDiv.className = 'commenter-username';
         usernameDiv.textContent = comment.user.username;
@@ -84,14 +85,12 @@ function showComments(data) {
         let dateDiv = document.createElement('div');
         dateDiv.textContent = comment.date;
         td1.appendChild(dateDiv);
-
         tr.appendChild(td1);
 
         let td2 = document.createElement('td');
         td2.className = 'comment-text';
         td2.textContent = comment.content;
         tr.appendChild(td2);
-
         tbody.appendChild(tr);
     });
 }
