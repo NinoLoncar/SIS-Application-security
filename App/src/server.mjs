@@ -85,6 +85,12 @@ server.post("/secure/provjeri-auth-kod", twoFactorAuth.verfiyToken);
 server.post("/secure/posalji-sredstva", transactionService.secureSendFunds);
 server.post("/secure/registracija", registrationHandler.secureRegisterUser);
 
+server.use((req, res) => {
+	res.send(
+		"Nepostojeca stranica, vrati se na <a href='/secure/prijava'>prijavu</a>"
+	);
+});
+
 server.listen(port, async () => {
 	console.log(`Server pokrenut na portu: ${port}`);
 });
