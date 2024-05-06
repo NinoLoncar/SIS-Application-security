@@ -111,11 +111,11 @@ function addEventListenersOnNews(firstNews, secondNews) {
     firstNews.addEventListener('click', (event) => {
         event.preventDefault();
         let newsId = firstNews.dataset.id;
-        window.location.href = `/unsecure/vijesti/${newsId}`;
+        window.location.href = `/secure/vijesti/${newsId}`;
     });
     secondNews.addEventListener('click', (event) => {
         event.preventDefault();
         let newsId = secondNews.dataset.id;
-        window.location.href = `/unsecure/vijesti/${newsId}`;
+        window.location.href = `/secure/vijesti/${newsId}`;
     });
 }

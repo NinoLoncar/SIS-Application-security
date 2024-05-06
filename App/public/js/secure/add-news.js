@@ -19,9 +19,9 @@ function handleAddNewsButton() {
             headers: header,
             body: JSON.stringify(newsData)
         };
-        const response = await fetch("http://localhost:12000/unsecure/dodaj-vijest", params);
+        const response = await fetch("http://localhost:12000/secure/dodaj-vijest", params);
         if (response.status == 201)
-            window.location.href = "/unsecure/vijesti";
+            window.location.href = "/secure/vijesti";
         else {
             let data = await response.json();
             let errorMessage = data.error;

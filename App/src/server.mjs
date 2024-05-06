@@ -57,7 +57,7 @@ serveUnsecureHtml();
 server.use((req, res, next) => {
 	res.setHeader(
 		"Content-Security-Policy",
-		"default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: *; frame-src 'self'"
+		"default-src 'self'; script-src 'self' cdnjs.cloudflare.com; style-src 'self'; font-src 'self'; img-src 'self' data: *; frame-src 'self'"
 	);
 	res.setHeader("X-Frame-Options", "sameorigin");
 	server.disable("x-powered-by");
@@ -155,6 +155,7 @@ function serveServices() {
 	server.post("/unsecure/dodaj-vijest", newsService.unsecureAddNews);
 	server.post("/unsecure/dodaj-komentar", newsService.unsecureAddComment);
 
+	server.post("/secure/dodaj-vijest", newsService.secureAddNews);
 	server.post("/secure/dodaj-komentar", newsService.secureAddComment);
 }
 function serveAuthenticationAndAuthorization() {

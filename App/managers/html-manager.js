@@ -37,6 +37,7 @@ class HtmlManager {
 		let page = await loadPage(this.pathBeginning + "/news-details", req);
 		res.send(page);
 	};
+
 	getAddNewsHtml = async function (req, res) {
 		let page = await loadPage(this.pathBeginning + "/add-news", req);
 		if (this.pathBeginning == "secure" && req.session.role == 1) {
@@ -46,8 +47,12 @@ class HtmlManager {
 			res.status(401);
 			res.send("Niste autorizirani");
 			return;
+		} else {
+			res.send(page);
+			return;
 		}
 	};
+
 	getTransactionsHtml = async function (req, res) {
 		let page = await loadPage(this.pathBeginning + "/transactions", req);
 		if (this.pathBeginning == "secure") {

@@ -82,7 +82,7 @@ function showComments(data) {
 		let td1 = document.createElement("td");
 		let usernameDiv = document.createElement("div");
 		usernameDiv.className = "commenter-username";
-		usernameDiv.textContent = comment.user.username;
+		usernameDiv.textContent = comment.user.name + " " + comment.user.surname;
 		td1.appendChild(usernameDiv);
 
 		let dateDiv = document.createElement("div");
@@ -92,7 +92,7 @@ function showComments(data) {
 
 		let td2 = document.createElement("td");
 		td2.className = "comment-text";
-		td2.textContent = comment.content;
+		td2.textContent = DOMPurify.sanitize(comment.content);
 		tr.appendChild(td2);
 		tbody.appendChild(tr);
 	});
