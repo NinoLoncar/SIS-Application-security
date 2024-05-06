@@ -40,14 +40,6 @@ server.use("/js", express.static(path.join(__dirname, "../public/js")));
 server.use("/images", express.static(path.join(__dirname, "../public/images")));
 
 server.use((req, res, next) => {
-	res.setHeader(
-		"Content-Security-Policy",
-		"default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: *; frame-src 'self'"
-	);
-	res.setHeader("X-Frame-Options", "sameorigin");
-	server.disable("x-powered-by");
-	res.setHeader("X-Content-Type-Options", "nosniff");
-
 	if (
 		!req.session.userId &&
 		req.path !== "/unsecure/prijava" &&
@@ -60,30 +52,22 @@ server.use((req, res, next) => {
 	next();
 });
 
-ServeUnsecureHtml();
-ServeSecureHtml();
+serveUnsecureHtml();
 
-server.get("/sesija/ulogirani-korisnik", async (req, res) => {
-	userService.unsecureGetUserByEmail(req.session.email, res);
+server.use((req, res, next) => {
+	res.setHeader(
+		"Content-Security-Policy",
+		"default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: *; frame-src 'self'"
+	);
+	res.setHeader("X-Frame-Options", "sameorigin");
+	server.disable("x-powered-by");
+	res.setHeader("X-Content-Type-Options", "nosniff");
+	next();
 });
-server.get("/sve-vijesti", newsService.getAllNews);
-server.get("/najnovije-vijesti", newsService.getTwoNewestNews);
-server.get("/vijest/:id", newsService.getNewsById);
-server.post("/dodaj-sredstva", transactionService.addFunds);
-server.get("/komentari/:newsId", newsService.getCommentsByNewsId);
 
-server.get("/odjava", loginHandler.logout);
-server.post("/unsecure/registracija", registrationHandler.unsecureRegisterUser);
-server.post("/unsecure/prijava", loginHandler.unsecureLogin);
-server.post("/unsecure/posalji-sredstva", transactionService.unsecureSendFunds);
-server.post("/unsecure/dodaj-vijest", newsService.unsecureAddNews);
-server.post("/unsecure/dodaj-komentar", newsService.unsecureAddComment);
-
-server.get("/secure/2fa", twoFactorAuth.activate2FA);
-server.post("/secure/prijava", loginHandler.secureLogin);
-server.post("/secure/provjeri-auth-kod", twoFactorAuth.verfiyToken);
-server.post("/secure/posalji-sredstva", transactionService.secureSendFunds);
-server.post("/secure/registracija", registrationHandler.secureRegisterUser);
+serveSecureHtml();
+serveAuthenticationAndAuthorization();
+serveServices();
 
 server.use((req, res) => {
 	res.send(
@@ -95,7 +79,7 @@ server.listen(port, async () => {
 	console.log(`Server pokrenut na portu: ${port}`);
 });
 
-function ServeUnsecureHtml() {
+function serveUnsecureHtml() {
 	let unsecureHtmlManager = new HtmlManager(false);
 
 	server.get(
@@ -128,7 +112,7 @@ function ServeUnsecureHtml() {
 	);
 }
 
-function ServeSecureHtml() {
+function serveSecureHtml() {
 	let secureHtmlManager = new HtmlManager(true);
 
 	server.get(
@@ -159,4 +143,39 @@ function ServeSecureHtml() {
 		"/secure/vijesti/:id",
 		secureHtmlManager.getNewsDetailsHtml.bind(secureHtmlManager)
 	);
+}
+
+function serveServices() {
+	server.get("/sve-vijesti", newsService.getAllNews);
+	server.get("/najnovije-vijesti", newsService.getTwoNewestNews);
+	server.get("/vijest/:id", newsService.getNewsById);
+	server.post("/dodaj-sredstva", transactionService.addFunds);
+	server.get("/komentari/:newsId", newsService.getCommentsByNewsId);
+
+	server.post("/unsecure/dodaj-vijest", newsService.unsecureAddNews);
+	server.post("/unsecure/dodaj-komentar", newsService.unsecureAddComment);
+
+	server.post("/secure/dodaj-komentar", newsService.secureAddComment);
+}
+function serveAuthenticationAndAuthorization() {
+	server.get("/odjava", loginHandler.logout);
+	server.post(
+		"/unsecure/registracija",
+		registrationHandler.unsecureRegisterUser
+	);
+	server.post("/unsecure/prijava", loginHandler.unsecureLogin);
+	server.post(
+		"/unsecure/posalji-sredstva",
+		transactionService.unsecureSendFunds
+	);
+
+	server.get("/secure/2fa", twoFactorAuth.activate2FA);
+	server.post("/secure/prijava", loginHandler.secureLogin);
+	server.post("/secure/provjeri-auth-kod", twoFactorAuth.verfiyToken);
+	server.post("/secure/posalji-sredstva", transactionService.secureSendFunds);
+	server.post("/secure/registracija", registrationHandler.secureRegisterUser);
+
+	server.get("/sesija/ulogirani-korisnik", async (req, res) => {
+		userService.unsecureGetUserByEmail(req.session.email, res);
+	});
 }

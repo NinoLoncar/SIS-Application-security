@@ -1,13 +1,14 @@
 const UserDAO = require("../../db/DAOs/user-DAO.js");
 const encryption = require("../encryption.js");
-const csrf = require('../csrf.js');
+const csrf = require("../csrf.js");
+const { or } = require("ajv/dist/compile/codegen/index.js");
 
 exports.unsecureLogin = async function (req, res) {
 	let userDAO = new UserDAO();
 	let userData = req.body;
 	res.type("application/json");
 	let userExists = await userDAO.unsecureGetUserByEmail(userData.email);
-	console.log(userExists)
+
 	if (!userExists) {
 		res.status(400);
 		res.send(JSON.stringify({ error: "Upisali ste krivi email!" }));
@@ -40,7 +41,7 @@ exports.secureLogin = async function (req, res) {
 	res.type("application/json");
 
 	let existingUser = await userDAO.getUserByEmail(userData.email);
-	if (!existingUser) {
+	if (!existingUser || existingUser.salt == undefined) {
 		res.status(400);
 		res.send(JSON.stringify({ error: "Netočni podaci!" }));
 		return;
