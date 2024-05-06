@@ -16,31 +16,31 @@
         <img id="logo" src="/images/logo.png" alt="App logo">
 
         <span id="first-name-text">Ime</span>
-        <input id="first-name-input" type="text">
+        <input id="first-name-input" type="text" required>
 
         <span id="last-name-text">Prezime</span>
-        <input id="last-name-input" type="text">
+        <input id="last-name-input" type="text" required>
 
 
         <span id="email-text">Email</span>
-        <input id="email-input" type="text">
+        <input id="email-input" type="email" maxlength="320">
 
         <span id="adress-text">Adresa</span>
-        <input id="adress-input" type="text">
+        <input id="adress-input" type="text" required>
 
         <span id="postal-text">Poštanski broj</span>
-        <input id="postal-input" type="text">
+        <input id="postal-input" type="text" required minlength="5" maxlength="5">
 
         <span id="country-text">Država</span>
-        <select id="select-input" name="country">
+        <select id="select-input" name="country" required>
             #države#
         </select>
 
         <span id="password-text">Lozinka</span>
-        <input id="password-input" type="password">
+        <input id="password-input" type="password" required>
 
         <span id="confirm-password-text">Potvrdite lozinku</span>
-        <input id="confirm-password-input" type="password">
+        <input id="confirm-password-input" type="password" required>
 
         <button id="register-button" type="submit">
             Registriraj se

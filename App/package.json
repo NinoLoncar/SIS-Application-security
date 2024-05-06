@@ -12,14 +12,14 @@
 	"license": "ISC",
 	"dependencies": {
 		"ajv": "^8.13.0",
-		"bcrypt": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/bcrypt",
-		"cors": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/cors",
-		"csrf": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/csrf",
-		"dotenv": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/dotenv",
-		"express": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/express",
-		"express-session": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/express-session",
-		"qrcode": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/qrcode",
-		"speakeasy": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/speakeasy",
-		"sqlite3": "file:../../.nvm/versions/node/v18.14.2/lib/node_modules/sqlite3"
+		"bcrypt": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/bcrypt",
+		"cors": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/cors",
+		"csrf": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/csrf",
+		"dotenv": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/dotenv",
+		"express": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/express",
+		"express-session": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/express-session",
+		"qrcode": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/qrcode",
+		"speakeasy": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/speakeasy",
+		"sqlite3": "file:../../../.nvm/versions/node/v18.14.2/lib/node_modules/sqlite3"
 	}
 }

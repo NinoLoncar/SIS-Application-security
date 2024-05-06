@@ -47,13 +47,11 @@ function getUserRegistrationData() {
 	let txtPostal = document.getElementById("postal-input");
 
 	let data = {
-		roles_id: 0,
-		countries_id: countriesSelectInput.value,
+		countries_id: parseInt(countriesSelectInput.value),
 		name: txtFirstName.value,
 		surname: txtLastName.value,
 		email: txtEmail.value,
 		password: txtPassword.value,
-		balance: 0,
 		address: txtAddress.value,
 		postal: txtPostal.value,
 	};
@@ -69,21 +67,52 @@ function validateUserRegistrationData(userData) {
 			userData[key] === undefined ||
 			userData[key] === ""
 		) {
-			errorContainer.innerHTML += "<p>Morate popuniti sva polja!</p>";
+			errorContainer.innerHTML += "<p>Morate popuniti sva polja</p>";
 			return false;
 		}
 	}
 	if (txtRepeatedPassword.value === "") {
-		errorContainer.innerHTML += "<p>Morate popuniti sva polja!</p>";
+		errorContainer.innerHTML += "<p>Morate popuniti sva polja</p>";
 		return false;
 	}
 	if (countriesSelectInput.value == 0) {
-		errorContainer.innerHTML += "<p>Niste odabrali državu!</p>";
+		errorContainer.innerHTML += "<p>Niste odabrali državu</p>";
 		return false;
 	}
 	if (txtRepeatedPassword.value != userData.password) {
-		errorContainer.innerHTML += "<p>Upisane lozinke se ne podudaraju!</p>";
+		errorContainer.innerHTML += "<p>Upisane lozinke se ne podudaraju</p>";
 		return false;
 	}
+
+	if (checkEmail(userData.email) == false) {
+		errorContainer.innerHTML += "<p>Email nije u ispravnom formatu</p>";
+		return false;
+	}
+
+	if (checkPostalCode(userData.postal) == false) {
+		console.log(userData.postal);
+		errorContainer.innerHTML +=
+			"<p>Poštanski broj mora biti peteroznamenkasti broj</p>";
+		return false;
+	}
+
+	if (userData.password.length < 8) {
+		errorContainer.innerHTML +=
+			"<p>Lozinka mora sadržavati barem 8 znakova</p>";
+		return false;
+	}
+
 	return true;
+}
+
+function checkEmail(text) {
+	const regex = new RegExp(
+		"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+	);
+	return regex.test(text);
+}
+
+function checkPostalCode(text) {
+	const regex = new RegExp("^\\d{5}$");
+	return regex.test(text);
 }
