@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import crypto from "crypto";
 import "dotenv/config";
 import { fileURLToPath } from "url";
 import path from "path";
@@ -15,11 +16,18 @@ import twoFactorAuth from "./two-factor-auth.js";
 const server = express();
 const port = process.env.PORT;
 
+let sessionSecret = crypto.randomBytes(32).toString("base64");
+
 server.use(
 	session({
-		secret: "secret",
+		secret: sessionSecret,
 		saveUninitialized: true,
-		cookie: { maxAge: 1000 * 60 * 60, sameSite: "strict" },
+		cookie: {
+			maxAge: 1000 * 60 * 15,
+			sameSite: "strict",
+			httpOnly: true,
+			//secure:true
+		},
 		resave: false,
 	})
 );
